@@ -1,0 +1,75 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-why-{{ section.id }}">
+  <section class="rs-section rs-no-pad rs-peach">
+    <div class="rs-why-image"{% if section.settings.image %} style="background-image: url('{{ section.settings.image | image_url: width: 1200 }}');"{% endif %}></div>
+    <div class="rs-why-content">
+      <h2 class="rs-why-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.lead != blank -%}
+        <p class="rs-why-lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+
+      <ul class="rs-why-list">
+        {%- for b in section.blocks -%}
+          <li class="rs-why-item" {{ b.shopify_attributes }}>
+            <div class="rs-why-icon">
+              {%- case b.settings.icon -%}
+                {%- when 'check' -%}
+                  <svg viewBox="0 0 16 16"><path d="M3 8 L7 12 L13 4"/></svg>
+                {%- when 'star' -%}
+                  <svg viewBox="0 0 16 16"><polygon points="8,2 10,6.5 14.5,7 11,10.5 12,15 8,12.5 4,15 5,10.5 1.5,7 6,6.5"/></svg>
+                {%- when 'heart' -%}
+                  <svg viewBox="0 0 16 16"><path d="M8 14 L3 9 Q1 7 3 5 Q5 3 8 6 Q11 3 13 5 Q15 7 13 9 Z"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5"/></svg>
+              {%- endcase -%}
+            </div>
+            <div class="rs-why-text">
+              <strong>{{ b.settings.title }}</strong>
+              <span>{{ b.settings.sub }}</span>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · why everyone talks",
+  "tag": "section",
+  "class": "rescens-section-why",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero-Bild (quadratisch)" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>warum alle <em>darüber reden.</em></p>" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "wir machen ein produkt. aber das richtige." }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Listen-Punkt",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [
+          { "value": "check", "label": "Check" },
+          { "value": "star", "label": "Stern" },
+          { "value": "heart", "label": "Herz" }
+        ]},
+        { "type": "text", "id": "title", "label": "Titel", "default": "kein risiko" },
+        { "type": "text", "id": "sub", "label": "Sub", "default": "nicht verliebt? geld zurück. kein drama." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · why everyone talks",
+      "category": "rescens",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "check", "title": "kein risiko", "sub": "nicht verliebt? geld zurück. kein drama." } },
+        { "type": "item", "settings": { "icon": "star", "title": "100k+ sind schon dabei", "sub": "die meisten bleiben." } },
+        { "type": "item", "settings": { "icon": "heart", "title": "vegan & cruelty free", "sub": "weil das standard sein sollte." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

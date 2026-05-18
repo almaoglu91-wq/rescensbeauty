@@ -1,0 +1,65 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-faq-{{ section.id }}">
+  <section class="rs-section rs-warm">
+    {%- if section.settings.show_hero -%}
+      <div class="rs-wondering-hero"{% if section.settings.hero_image %} style="background-image: url('{{ section.settings.hero_image | image_url: width: 1200 }}');"{% endif %}>
+        <h2>{{ section.settings.hero_title }}</h2>
+      </div>
+    {%- else -%}
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.hero_title != blank -%}
+        <h2 class="rs-section-title">{{ section.settings.hero_title }}</h2>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- for b in section.blocks -%}
+      <details class="rs-faq-item"{% if b.settings.open_by_default %} open{% endif %} {{ b.shopify_attributes }}>
+        <summary>{{ b.settings.question }}</summary>
+        <div class="rs-faq-answer">{{ b.settings.answer }}</div>
+      </details>
+    {%- endfor -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · faq",
+  "tag": "section",
+  "class": "rescens-section-faq",
+  "settings": [
+    { "type": "checkbox", "id": "show_hero", "label": "Großes Hero-Bild oben", "default": true },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero-Bild" },
+    { "type": "richtext", "id": "hero_title", "label": "Hero-Titel", "default": "<p>in case <em>you are</em> wondering...</p>" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (falls kein Hero)", "default": "häufige fragen" }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "FAQ Eintrag",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Frage", "default": "funktioniert es wirklich ohne hormone" },
+        { "type": "richtext", "id": "answer", "label": "Antwort", "default": "<p>ja. rescens wirkt über vier signalpeptide, die die wimpernlinie pflegen und stärken. ohne prostaglandin analoga.</p>" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Standardmäßig offen", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · faq",
+      "category": "rescens",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "funktioniert es wirklich ohne hormone", "answer": "<p>ja. rescens wirkt über vier signalpeptide, die die wimpernlinie pflegen und stärken. ohne prostaglandin analoga.</p><p>in unserer anwenderstudie bestätigten <strong>85% sichtbar längere wimpern</strong> nach 8 wochen.</p>", "open_by_default": true } },
+        { "type": "qa", "settings": { "question": "wann sehe ich erste ergebnisse", "answer": "<p>erste veränderungen meist nach <strong>4 bis 6 wochen</strong>. volle routine 8 bis 12 wochen.</p>" } },
+        { "type": "qa", "settings": { "question": "sicherheit und nebenwirkungen", "answer": "<p>dermatologisch getestet, dermatest „sehr gut\". frei von prostaglandin analoga, hormonen, parfum. verträglich bei sensiblen augen.</p>" } },
+        { "type": "qa", "settings": { "question": "kompatibel mit extensions und lash lift", "answer": "<p>ja. oil free formuliert. greift verlängerungen nicht an. besonders zur pflege nach extensions geeignet.</p>" } },
+        { "type": "qa", "settings": { "question": "schwangerschaft und stillzeit", "answer": "<p>rücksprache mit deiner ärztin empfohlen. das serum ist hormonfrei formuliert.</p>" } },
+        { "type": "qa", "settings": { "question": "wie lange hält eine flasche", "answer": "<p>eine 5 ml flasche reicht bei täglicher anwendung ca. 6 bis 8 wochen.</p>" } },
+        { "type": "qa", "settings": { "question": "versand und rückgabe", "answer": "<p>versand heute bei bestellung bis 14 uhr. lieferung 1 bis 2 werktage. kostenlos ab 40 euro. 14 tage widerrufsrecht plus 60 tage wirkungs garantie.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

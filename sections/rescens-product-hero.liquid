@@ -1,0 +1,375 @@
+{%- render 'rescens-assets' -%}
+
+{%- liquid
+  assign product = all_products[section.settings.product]
+  if section.settings.product == blank and template contains 'product'
+    assign product = product
+  endif
+-%}
+
+<div class="rescens-scope" id="rescens-hero-{{ section.id }}">
+  <section class="rs-hero">
+
+    {%- comment -%} GALLERY {%- endcomment -%}
+    <div class="rs-gallery-wrap">
+      <div class="rs-gallery" data-rs-gallery>
+        {%- assign image_blocks = section.blocks | where: 'type', 'gallery_image' -%}
+        {%- if image_blocks.size > 0 -%}
+          {%- for block in image_blocks -%}
+            <div class="rs-gallery-slide{% if block.settings.is_video %} rs-video{% endif %}"
+                 style="{% if block.settings.image %}background-image: url('{{ block.settings.image | image_url: width: 1200 }}');{% endif %}"
+                 {{ block.shopify_attributes }}>
+              {%- if forloop.first and section.settings.award_text != blank -%}
+                <div class="rs-award-stamp">{{ section.settings.award_text }}</div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- elsif product and product.images.size > 0 -%}
+          {%- for img in product.images -%}
+            <div class="rs-gallery-slide" style="background-image: url('{{ img | image_url: width: 1200 }}');">
+              {%- if forloop.first and section.settings.award_text != blank -%}
+                <div class="rs-award-stamp">{{ section.settings.award_text }}</div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..3) -%}
+            <div class="rs-gallery-slide">
+              {%- if forloop.first and section.settings.award_text != blank -%}
+                <div class="rs-award-stamp">{{ section.settings.award_text }}</div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <div class="rs-gallery-dots">
+        {%- assign dot_count = image_blocks.size -%}
+        {%- if dot_count == 0 and product -%}{%- assign dot_count = product.images.size -%}{%- endif -%}
+        {%- if dot_count == 0 -%}{%- assign dot_count = 3 -%}{%- endif -%}
+        {%- for i in (1..dot_count) -%}
+          <div class="rs-gallery-dot{% if forloop.first %} is-active{% endif %}"></div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} THUMBS {%- endcomment -%}
+    {%- if section.settings.show_thumbs -%}
+      <div class="rs-thumbs-row">
+        {%- if image_blocks.size > 0 -%}
+          {%- for block in image_blocks -%}
+            <div class="rs-thumb{% if forloop.first %} is-active{% endif %}"
+                 style="{% if block.settings.image %}background-image: url('{{ block.settings.image | image_url: width: 200 }}');{% endif %}"></div>
+          {%- endfor -%}
+        {%- elsif product and product.images.size > 0 -%}
+          {%- for img in product.images -%}
+            <div class="rs-thumb{% if forloop.first %} is-active{% endif %}"
+                 style="background-image: url('{{ img | image_url: width: 200 }}');"></div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} INFO BLOCK {%- endcomment -%}
+    <div class="rs-info-block">
+
+      {%- if section.settings.show_press -%}
+        <div class="rs-press-line">
+          <span class="rs-press-label">{{ section.settings.press_label }}</span>
+          {%- assign press_items = section.settings.press_list | split: ',' -%}
+          {%- for item in press_items -%}
+            <span>{{ item | strip }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_rating -%}
+        <div class="rs-rating-row">
+          <span class="rs-stars-display"><strong>{{ section.settings.rating_stars }} {{ section.settings.rating_value }}</strong></span>
+          <span class="rs-rating-meta">{{ section.settings.rating_meta }}</span>
+          {%- if section.settings.customer_pill != blank -%}
+            <span class="rs-customer-pill">{{ section.settings.customer_pill }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="rs-product-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+
+      <h1 class="rs-product-title">{{ section.settings.title }}</h1>
+
+      {%- if section.settings.subhead != blank -%}
+        <p class="rs-subhead">{{ section.settings.subhead }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.show_stock -%}
+        <div class="rs-stock-bar">
+          <div class="rs-stock-icon">✓</div>
+          <div class="rs-stock-text">
+            <strong>{{ section.settings.stock_title }}</strong>
+            <span>{{ section.settings.stock_sub }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} BUNDLES (blocks) {%- endcomment -%}
+      {%- assign bundle_blocks = section.blocks | where: 'type', 'bundle' -%}
+      {%- if bundle_blocks.size > 0 -%}
+        <form method="post" action="/cart/add" id="rs-form-{{ section.id }}" class="rs-bundles-form">
+          <div class="rs-bundles">
+            {%- for b in bundle_blocks -%}
+              <label class="rs-bundle{% if b.settings.is_default %} is-selected{% endif %}"
+                     data-value="{{ b.settings.variant_id }}"
+                     {{ b.shopify_attributes }}>
+                {%- if b.settings.flag != blank -%}
+                  <div class="rs-bundle-flag{% if b.settings.flag_gold %} rs-gold{% endif %}">{{ b.settings.flag }}</div>
+                {%- endif -%}
+                <div class="rs-bundle-row">
+                  <span class="rs-bundle-radio"></span>
+                  <input type="radio" name="id" value="{{ b.settings.variant_id }}"
+                         style="display:none;"{% if b.settings.is_default %} checked{% endif %}>
+                  <div class="rs-bundle-content">
+                    <div class="rs-bundle-name">{{ b.settings.name }}</div>
+                    <div class="rs-bundle-meta">{{ b.settings.meta }}</div>
+                  </div>
+                  <div class="rs-bundle-prices">
+                    <div class="rs-price-now">{{ b.settings.price }}</div>
+                    {%- if b.settings.price_per != blank -%}
+                      <div class="rs-price-per">{{ b.settings.price_per }}</div>
+                    {%- endif -%}
+                    {%- if b.settings.save_badge != blank -%}
+                      <div class="rs-save-badge">{{ b.settings.save_badge }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+                {%- if b.settings.bonus != blank -%}
+                  <div class="rs-bundle-bonus">{{ b.settings.bonus }}</div>
+                {%- endif -%}
+              </label>
+            {%- endfor -%}
+          </div>
+
+          {%- if section.settings.show_sub_toggle -%}
+            <div class="rs-sub-toggle">
+              <div class="rs-sub-toggle-text">
+                <strong>{{ section.settings.sub_title }}</strong>
+                <span>{{ section.settings.sub_sub }}</span>
+              </div>
+              <div class="rs-sub-switch"></div>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_price_line -%}
+            <div class="rs-price-line">
+              <span class="rs-price-main">{{ section.settings.price_display }}</span>
+            </div>
+            {%- if section.settings.klarna_text != blank -%}
+              <div class="rs-klarna-line">
+                {{ section.settings.klarna_text }} <span class="rs-klarna-logo">klarna</span>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+
+          <button type="submit" class="rs-cta-primary">{{ section.settings.cta_label }}</button>
+
+          {%- if section.settings.show_express -%}
+            <div class="rs-express-row">
+              <button type="button" class="rs-cta-express">shop pay</button>
+              <button type="button" class="rs-cta-apple">apple pay</button>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.secondary_label != blank -%}
+            <a class="rs-cta-secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+          {%- endif -%}
+        </form>
+      {%- else -%}
+        {%- comment -%} fallback: standard single buy button {%- endcomment -%}
+        {%- if product -%}
+          {%- form 'product', product -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="rs-cta-primary">{{ section.settings.cta_label }}</button>
+          {%- endform -%}
+        {%- else -%}
+          <button class="rs-cta-primary">{{ section.settings.cta_label }}</button>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- comment -%} MICRO TRUST {%- endcomment -%}
+      {%- assign trust_blocks = section.blocks | where: 'type', 'trust_mini' -%}
+      {%- if trust_blocks.size > 0 -%}
+        <div class="rs-micro-trust">
+          {%- for t in trust_blocks -%}
+            <div class="rs-trust-mini" {{ t.shopify_attributes }}>
+              <div class="rs-trust-mini-icon">{{ t.settings.icon }}</div>
+              <div>
+                <strong>{{ t.settings.title }}</strong>
+                <span>{{ t.settings.sub }}</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_live_notif -%}
+        <div class="rs-live-notification">
+          <div class="rs-live-pulse-dot"></div>
+          <div class="rs-live-avatars">
+            {%- if section.settings.avatar_1 -%}<span style="background-image: url('{{ section.settings.avatar_1 | image_url: width: 80 }}');"></span>{%- else -%}<span></span>{%- endif -%}
+            {%- if section.settings.avatar_2 -%}<span style="background-image: url('{{ section.settings.avatar_2 | image_url: width: 80 }}');"></span>{%- else -%}<span></span>{%- endif -%}
+            {%- if section.settings.avatar_3 -%}<span style="background-image: url('{{ section.settings.avatar_3 | image_url: width: 80 }}');"></span>{%- else -%}<span></span>{%- endif -%}
+          </div>
+          <div class="rs-live-text">{{ section.settings.live_notif_text }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_derm -%}
+        <div class="rs-derm-badge">
+          <div class="rs-derm-avatar"{% if section.settings.derm_avatar %} style="background-image: url('{{ section.settings.derm_avatar | image_url: width: 120 }}');"{% endif %}></div>
+          <div class="rs-derm-text">
+            <strong>{{ section.settings.derm_name }}</strong>
+            <span>{{ section.settings.derm_quote }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </section>
+
+  {%- if section.settings.show_wave -%}
+    <svg class="rs-wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,20 Q120,5 240,20 T480,20 T720,20 T960,20 T1200,20 T1440,20"/>
+    </svg>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "rescens · product hero",
+  "tag": "section",
+  "class": "rescens-section-hero",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "header", "content": "Produkt" },
+    { "type": "product", "id": "product", "label": "Verknüpftes Produkt (optional)" },
+    { "type": "text", "id": "award_text", "label": "Award stamp HTML", "default": "elise<br>juliette<br><strong>skin awards</strong><br>winner" },
+    { "type": "checkbox", "id": "show_thumbs", "label": "Thumbnails anzeigen", "default": true },
+
+    { "type": "header", "content": "Presse-Zeile" },
+    { "type": "checkbox", "id": "show_press", "label": "Anzeigen", "default": true },
+    { "type": "text", "id": "press_label", "label": "Label", "default": "— bekannt aus" },
+    { "type": "text", "id": "press_list", "label": "Logos (komma-getrennt)", "default": "vogue, glamour, elle, brigitte" },
+
+    { "type": "header", "content": "Rating" },
+    { "type": "checkbox", "id": "show_rating", "label": "Anzeigen", "default": true },
+    { "type": "text", "id": "rating_stars", "label": "Sterne", "default": "★★★★★" },
+    { "type": "text", "id": "rating_value", "label": "Wert", "default": "4,8" },
+    { "type": "text", "id": "rating_meta", "label": "Bewertungs-Zahl", "default": "50.673 bewertungen" },
+    { "type": "text", "id": "customer_pill", "label": "Customer Pill", "default": "100k+ kundinnen" },
+
+    { "type": "header", "content": "Titel" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— the peptide lash serum · 5 ml" },
+    { "type": "richtext", "id": "title", "label": "Produkttitel (richtext)", "default": "<p>sichtbar längere wimpern <span class=\"rs-accent\">in 8 wochen.</span></p>" },
+    { "type": "richtext", "id": "subhead", "label": "Subhead", "default": "<p>mit dem <strong>rescens peptilash komplex</strong>. <span class=\"rs-highlight\">hormonfrei</span> pflegt die wimpernlinie. ohne prostaglandin analoga.</p>" },
+
+    { "type": "header", "content": "Stock bar" },
+    { "type": "checkbox", "id": "show_stock", "label": "Anzeigen", "default": true },
+    { "type": "text", "id": "stock_title", "label": "Titel", "default": "auf lager · versand heute" },
+    { "type": "text", "id": "stock_sub", "label": "Sub", "default": "bestelle bis 14 uhr, lieferung morgen mit dhl." },
+
+    { "type": "header", "content": "Subscription Toggle" },
+    { "type": "checkbox", "id": "show_sub_toggle", "label": "Anzeigen", "default": true },
+    { "type": "text", "id": "sub_title", "label": "Titel", "default": "refill alle 8 wochen · spare 15%" },
+    { "type": "text", "id": "sub_sub", "label": "Sub", "default": "jederzeit pausieren oder kündigen." },
+
+    { "type": "header", "content": "Preis Anzeige" },
+    { "type": "checkbox", "id": "show_price_line", "label": "Anzeigen", "default": true },
+    { "type": "text", "id": "price_display", "label": "Preis", "default": "€44,90" },
+    { "type": "richtext", "id": "klarna_text", "label": "Klarna text", "default": "<p>oder 3× <strong>€14,97</strong> mit</p>" },
+
+    { "type": "header", "content": "CTA" },
+    { "type": "text", "id": "cta_label", "label": "Primärer CTA Text", "default": "in den warenkorb · €44,90" },
+    { "type": "checkbox", "id": "show_express", "label": "Express Pay Buttons", "default": true },
+    { "type": "text", "id": "secondary_label", "label": "Sekundärer CTA Label", "default": "routine quiz · 60 sek" },
+    { "type": "url", "id": "secondary_link", "label": "Sekundärer CTA Link" },
+
+    { "type": "header", "content": "Live Notification" },
+    { "type": "checkbox", "id": "show_live_notif", "label": "Anzeigen", "default": true },
+    { "type": "image_picker", "id": "avatar_1", "label": "Avatar 1" },
+    { "type": "image_picker", "id": "avatar_2", "label": "Avatar 2" },
+    { "type": "image_picker", "id": "avatar_3", "label": "Avatar 3" },
+    { "type": "richtext", "id": "live_notif_text", "label": "Text", "default": "<p><strong>melina, lea und 245 andere</strong> haben heute bestellt</p>" },
+
+    { "type": "header", "content": "Dermatologist Badge" },
+    { "type": "checkbox", "id": "show_derm", "label": "Anzeigen", "default": true },
+    { "type": "image_picker", "id": "derm_avatar", "label": "Avatar" },
+    { "type": "text", "id": "derm_name", "label": "Name", "default": "dr. med. stefan müller, augenarzt" },
+    { "type": "text", "id": "derm_quote", "label": "Quote", "default": "„hormonfreie pflege, die ich bei sensiblen augen empfehlen kann.\"" },
+
+    { "type": "header", "content": "Wave divider" },
+    { "type": "checkbox", "id": "show_wave", "label": "Wave-Trennlinie unten", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Gallery Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "checkbox", "id": "is_video", "label": "Als Video markieren (Play-Button-Overlay)", "default": false }
+      ]
+    },
+    {
+      "type": "bundle",
+      "name": "Bundle Option",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "duo · 2 flaschen" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "12 wochen · volle phase" },
+        { "type": "text", "id": "price", "label": "Preis", "default": "€44,90" },
+        { "type": "text", "id": "price_per", "label": "Preis pro Einheit", "default": "€22,45 / fl" },
+        { "type": "text", "id": "save_badge", "label": "Save badge", "default": "spare €29" },
+        { "type": "text", "id": "flag", "label": "Flag (z.B. 'beliebteste')", "default": "" },
+        { "type": "checkbox", "id": "flag_gold", "label": "Flag in Gold (peach)", "default": false },
+        { "type": "text", "id": "bonus", "label": "Bonus-Text unter Bundle", "default": "" },
+        { "type": "text", "id": "variant_id", "label": "Shopify Variant ID" },
+        { "type": "checkbox", "id": "is_default", "label": "Voreingestellt", "default": false }
+      ]
+    },
+    {
+      "type": "trust_mini",
+      "name": "Micro-Trust Item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (Emoji/Glyph)", "default": "✓" },
+        { "type": "text", "id": "title", "label": "Titel", "default": "60 tage geld zurück" },
+        { "type": "text", "id": "sub", "label": "Sub", "default": "keine rücksendung" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · product hero",
+      "category": "rescens",
+      "blocks": [
+        { "type": "gallery_image" },
+        { "type": "gallery_image" },
+        { "type": "gallery_image" },
+        {
+          "type": "bundle",
+          "settings": { "name": "starter · 1 flasche", "meta": "6 wochen routine", "price": "€36,90", "price_per": "€36,90 / fl" }
+        },
+        {
+          "type": "bundle",
+          "settings": { "name": "duo · 2 flaschen", "meta": "12 wochen · volle phase", "price": "€44,90", "price_per": "€22,45 / fl", "save_badge": "spare €29", "flag": "beliebteste", "is_default": true, "bonus": "gratis applikator pinsel + lash recovery protokoll" }
+        },
+        {
+          "type": "bundle",
+          "settings": { "name": "trio · 3 flaschen", "meta": "16+ wochen routine", "price": "€69,90", "price_per": "€23,30 / fl", "save_badge": "+ reise etui", "flag": "komplettes ritual", "flag_gold": true, "bonus": "applikator + protokoll + reise etui + lifetime 15% refill" }
+        },
+        { "type": "trust_mini", "settings": { "icon": "✓", "title": "60 tage geld zurück", "sub": "keine rücksendung" } },
+        { "type": "trust_mini", "settings": { "icon": "⚡", "title": "versand heute", "sub": "bis 14 uhr" } },
+        { "type": "trust_mini", "settings": { "icon": "★", "title": "dermatest sehr gut", "sub": "sensible augen ok" } },
+        { "type": "trust_mini", "settings": { "icon": "🔒", "title": "sicher zahlen", "sub": "klarna · paypal" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

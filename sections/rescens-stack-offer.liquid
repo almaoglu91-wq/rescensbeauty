@@ -1,0 +1,83 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-stack-{{ section.id }}">
+  <section class="rs-section rs-dark">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+    {%- if section.settings.lead != blank -%}
+      <p class="rs-section-lead">{{ section.settings.lead }}</p>
+    {%- endif -%}
+
+    <div class="rs-stack-items">
+      {%- for b in section.blocks -%}
+        <div class="rs-stack-item" {{ b.shopify_attributes }}>
+          <div class="rs-stack-item-left">
+            <div class="rs-stack-item-icon">{{ forloop.index }}</div>
+            <div class="rs-stack-item-name">{{ b.settings.name }}<small>{{ b.settings.sub }}</small></div>
+          </div>
+          <div class="rs-stack-item-price{% if b.settings.is_free %} rs-free{% endif %}">{{ b.settings.price }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="rs-stack-total">
+      <div class="rs-stack-total-label">{{ section.settings.total_label }}<small>{{ section.settings.total_sub }}</small></div>
+      <div>
+        {%- if section.settings.old_price != blank -%}
+          <span class="rs-stack-total-old">{{ section.settings.old_price }}</span>
+        {%- endif -%}
+        <span class="rs-stack-total-new">{{ section.settings.new_price }}</span>
+      </div>
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <a class="rs-stack-cta" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · stack offer",
+  "tag": "section",
+  "class": "rescens-section-stack",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "duo · komplettpaket" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>mehr als ein serum. <span class=\"rs-accent\">eine routine.</span></p>" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "du bestellst kein produkt. du startest eine transformation." },
+    { "type": "text", "id": "total_label", "label": "Total Label", "default": "gesamtwert €156+" },
+    { "type": "text", "id": "total_sub", "label": "Total Sub", "default": "dein preis heute" },
+    { "type": "text", "id": "old_price", "label": "Alter Preis (durchgestrichen)", "default": "€156" },
+    { "type": "text", "id": "new_price", "label": "Neuer Preis", "default": "€44,90" },
+    { "type": "text", "id": "cta_label", "label": "CTA Text", "default": "jetzt sichern · versand heute" },
+    { "type": "url", "id": "cta_link", "label": "CTA Link" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Stack Item",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "peptide lash serum 5ml" },
+        { "type": "text", "id": "sub", "label": "Sub", "default": "hauptprodukt" },
+        { "type": "text", "id": "price", "label": "Preis", "default": "€36,90" },
+        { "type": "checkbox", "id": "is_free", "label": "„+ €X\" gratis Style", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · stack offer",
+      "category": "rescens",
+      "blocks": [
+        { "type": "item", "settings": { "name": "peptide lash serum 5ml", "sub": "hauptprodukt", "price": "€36,90", "is_free": false } },
+        { "type": "item", "settings": { "name": "applikator pinsel", "sub": "spart produkt", "price": "+ €12", "is_free": true } },
+        { "type": "item", "settings": { "name": "recovery protokoll", "sub": "8 wochen anleitung", "price": "+ €19", "is_free": true } },
+        { "type": "item", "settings": { "name": "email begleitung", "sub": "6 wochen", "price": "+ €29", "is_free": true } },
+        { "type": "item", "settings": { "name": "lifetime refill 15%", "sub": "für folgebestellungen", "price": "+ €60", "is_free": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

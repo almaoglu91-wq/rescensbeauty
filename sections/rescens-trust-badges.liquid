@@ -1,0 +1,57 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-trust-{{ section.id }}">
+  <section class="rs-section rs-warm">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+
+    <div class="rs-badge-grid" style="margin-top: 36px;">
+      {%- for b in section.blocks -%}
+        <div class="rs-trust-badge" {{ b.shopify_attributes }}>
+          <div class="rs-icon">{{ b.settings.icon }}</div>
+          <div class="rs-label">{{ b.settings.label }}</div>
+          <div class="rs-sub">{{ b.settings.sub }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · trust badges",
+  "tag": "section",
+  "class": "rescens-section-trust",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "vertrauen" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>geprüft. <span class=\"rs-accent\">zertifiziert.</span></p>" }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Trust Badge",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (Emoji)", "default": "✓" },
+        { "type": "text", "id": "label", "label": "Label", "default": "trusted shops" },
+        { "type": "text", "id": "sub", "label": "Sub", "default": "käuferschutz" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · trust badges",
+      "category": "rescens",
+      "blocks": [
+        { "type": "badge", "settings": { "icon": "✓", "label": "trusted shops", "sub": "käuferschutz" } },
+        { "type": "badge", "settings": { "icon": "★", "label": "dermatest", "sub": "sehr gut" } },
+        { "type": "badge", "settings": { "icon": "v", "label": "v label", "sub": "vegan" } },
+        { "type": "badge", "settings": { "icon": "♡", "label": "leaping bunny", "sub": "cruelty free" } },
+        { "type": "badge", "settings": { "icon": "⌂", "label": "made in germany", "sub": "formuliert in de" } },
+        { "type": "badge", "settings": { "icon": "€", "label": "klarna · paypal", "sub": "sicher zahlen" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

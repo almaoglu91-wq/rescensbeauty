@@ -1,0 +1,79 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-announcement-{{ section.id }}">
+  {%- if section.settings.show_top_banner -%}
+    <div class="rs-top-banner">
+      {%- if section.settings.show_flag -%}
+        <span class="rs-flag">{{ section.settings.flag_text }}</span>
+        <span class="rs-sep">·</span>
+      {%- endif -%}
+      {{ section.settings.banner_text }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_ticker -%}
+    <div class="rs-live-ticker">
+      <span class="rs-dot"></span>{{ section.settings.ticker_text }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "rescens · announcement bar",
+  "tag": "section",
+  "class": "rescens-section-announcement",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top banner (dark)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_banner",
+      "label": "Top banner anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_flag",
+      "label": "DE flag icon zeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "flag_text",
+      "label": "Flag label",
+      "default": "made in germany"
+    },
+    {
+      "type": "richtext",
+      "id": "banner_text",
+      "label": "Banner inhalt (richtext, <strong> erlaubt)",
+      "default": "<p><strong>versand heute bis 14 uhr</strong></p>"
+    },
+    {
+      "type": "header",
+      "content": "Live ticker (peach)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ticker",
+      "label": "Live ticker anzeigen",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "ticker_text",
+      "label": "Ticker text",
+      "default": "<p><strong>247 frauen</strong> haben heute bereits bestellt</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · announcement bar",
+      "category": "rescens"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-stats-{{ section.id }}">
+  <section class="rs-section{% if section.settings.bg == 'warm' %} rs-warm{% elsif section.settings.bg == 'dark' %} rs-dark{% endif %}">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.lead != blank -%}
+      <p class="rs-section-lead">{{ section.settings.lead }}</p>
+    {%- endif -%}
+
+    <div class="rs-stats-scroll">
+      {%- for block in section.blocks -%}
+        <div class="rs-stat-card" {{ block.shopify_attributes }}>
+          <div class="rs-stat-num">{{ block.settings.number }}</div>
+          <div class="rs-stat-label">{{ block.settings.label }}</div>
+          {%- if block.settings.study != blank -%}
+            <div class="rs-stat-study">{{ block.settings.study }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · stats",
+  "tag": "section",
+  "class": "rescens-section-stats",
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Hintergrund", "default": "default", "options": [
+      { "value": "default", "label": "Default" },
+      { "value": "warm", "label": "Warm" },
+      { "value": "dark", "label": "Dark" }
+    ]},
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "echte ergebnisse" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>die zahlen <span class=\"rs-accent\">aus 8 wochen.</span></p>" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "anwenderstudie unter dermatologischer kontrolle. n=52, 8 wochen." }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat Card",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Zahl", "default": "85%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "bestätigen sichtbar längere wimpern" },
+        { "type": "text", "id": "study", "label": "Studien-Quelle", "default": "n=52, 8 wochen, testinstitut 2025" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · stats",
+      "category": "rescens",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "85%", "label": "bestätigen sichtbar längere wimpern", "study": "n=52, 8 wochen, testinstitut 2025" } },
+        { "type": "stat", "settings": { "number": "80%", "label": "bestätigen voller wirkende wimpern", "study": "n=52, 8 wochen, testinstitut 2025" } },
+        { "type": "stat", "settings": { "number": "96%", "label": "würden rescens weiterempfehlen", "study": "n=52, 8 wochen, testinstitut 2025" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

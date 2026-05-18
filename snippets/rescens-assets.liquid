@@ -1,0 +1,9 @@
+{%- comment -%}
+  Loads shared rescens CSS, fonts and JS.
+  Safe to include in every rescens section — browsers dedupe identical asset URLs.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+{{ 'rescens.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'rescens.js' | asset_url }}" defer></script>

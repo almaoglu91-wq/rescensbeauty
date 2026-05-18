@@ -1,0 +1,48 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-founder-{{ section.id }}">
+  <section class="rs-section rs-warm">
+    <div class="rs-founder-photo"{% if section.settings.photo %} style="background-image: url('{{ section.settings.photo | image_url: width: 1200 }}');"{% endif %}>
+      {%- if section.settings.show_quote_mark -%}
+        <div class="rs-founder-quote-mark">&ldquo;</div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-founder-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-founder-title">{{ section.settings.title }}</h2>
+    <div class="rs-founder-body">{{ section.settings.body }}</div>
+
+    {%- if section.settings.show_sign -%}
+      <div class="rs-founder-sign">
+        <div class="rs-founder-sign-avatar"{% if section.settings.sign_avatar %} style="background-image: url('{{ section.settings.sign_avatar | image_url: width: 120 }}');"{% endif %}></div>
+        <div class="rs-founder-sign-text">
+          <strong>{{ section.settings.sign_name }}</strong>
+          <span>{{ section.settings.sign_role }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · founder story",
+  "tag": "section",
+  "class": "rescens-section-founder",
+  "settings": [
+    { "type": "image_picker", "id": "photo", "label": "Founder Foto (4:5 ratio)" },
+    { "type": "checkbox", "id": "show_quote_mark", "label": "Großes Anführungszeichen anzeigen", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— die geschichte hinter rescens" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>wir haben rescens gebaut, weil wir <em>selbst nichts vertrauen konnten.</em></p>" },
+    { "type": "richtext", "id": "body", "label": "Body Text", "default": "<p>ich habe drei jahre lang hormonelle wimpernseren probiert. die wirkung war da. dunkle augenringe und trockene augen waren auch da.</p><p><strong>ich wollte ein serum, das pflegt statt verändert.</strong> formuliert in deutschland, ohne prostaglandin analoga, getestet bei sensiblen augen. das gab es nicht. also haben wir es gemacht.</p><p>rescens ist für jede frau, die wimpern will, aber nicht ihr auge dafür gibt.</p>" },
+    { "type": "checkbox", "id": "show_sign", "label": "Signatur-Block anzeigen", "default": true },
+    { "type": "image_picker", "id": "sign_avatar", "label": "Signatur Avatar" },
+    { "type": "text", "id": "sign_name", "label": "Name", "default": "selma & jonas" },
+    { "type": "text", "id": "sign_role", "label": "Rolle", "default": "rescens founders · hamburg" }
+  ],
+  "presets": [
+    { "name": "rescens · founder story", "category": "rescens" }
+  ]
+}
+{% endschema %}

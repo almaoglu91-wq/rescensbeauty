@@ -1,0 +1,168 @@
+{%- render 'rescens-assets' -%}
+
+{%- assign sheet_id = section.id -%}
+
+<style>
+  /* Section-scoped: only pad body when this section is enabled */
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+
+  /* Bottom sheet specific (kept inline because it overlays the entire viewport) */
+  .rescens-scope .rs-bottom-sheet-overlay {
+    position: fixed; inset: 0;
+    background: rgba(31, 29, 26, 0.6);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .rescens-scope .rs-bottom-sheet-overlay.is-show { opacity: 1; pointer-events: auto; }
+  .rescens-scope .rs-bottom-sheet {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--rs-bg);
+    border-radius: 16px 16px 0 0;
+    z-index: 201;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding-bottom: calc(20px + var(--rs-safe-bottom));
+  }
+  .rescens-scope .rs-bottom-sheet.is-show { transform: translateY(0); }
+  .rescens-scope .rs-bottom-sheet-handle {
+    width: 36px; height: 4px;
+    background: var(--rs-line);
+    border-radius: 100px;
+    margin: 12px auto 16px;
+  }
+  .rescens-scope .rs-bottom-sheet-header {
+    padding: 0 20px 16px;
+    border-bottom: 1px solid var(--rs-line);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .rescens-scope .rs-bottom-sheet-header h3 { font-size: 16px; font-weight: 500; }
+  .rescens-scope .rs-bottom-sheet-close {
+    width: 32px; height: 32px;
+    background: var(--rs-bg-warm);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--rs-ink-2);
+  }
+  .rescens-scope .rs-bottom-sheet-body { padding: 20px; }
+  .rescens-scope .rs-bottom-sheet-cta {
+    background: var(--rs-ink); color: var(--rs-bg);
+    padding: 16px; font-size: 13px;
+    letter-spacing: 0.1em; font-weight: 500;
+    border-radius: 100px; width: 100%;
+    margin-top: 16px; min-height: 54px;
+  }
+</style>
+
+<div class="rescens-scope" id="rescens-sticky-{{ section.id }}">
+  <div class="rs-sticky-cta">
+    <div class="rs-sticky-inner">
+      <div class="rs-sticky-thumb"{% if section.settings.thumb %} style="background-image: url('{{ section.settings.thumb | image_url: width: 120 }}');"{% endif %}></div>
+      <div class="rs-sticky-text">
+        <div class="rs-sticky-name">{{ section.settings.product_name }}</div>
+        <div class="rs-sticky-price"><span class="rs-green-dot"></span>{{ section.settings.price_meta }}</div>
+      </div>
+      <button class="rs-sticky-btn" data-rs-sheet-open="{{ sheet_id }}">{{ section.settings.cta_label }}</button>
+    </div>
+  </div>
+
+  {%- if section.settings.show_sheet -%}
+    <div class="rs-bottom-sheet-overlay" data-rs-sheet-overlay="{{ sheet_id }}"></div>
+    <div class="rs-bottom-sheet" data-rs-sheet="{{ sheet_id }}">
+      <div class="rs-bottom-sheet-handle"></div>
+      <div class="rs-bottom-sheet-header">
+        <h3>{{ section.settings.sheet_title }}</h3>
+        <button class="rs-bottom-sheet-close" data-rs-sheet-close>×</button>
+      </div>
+      <div class="rs-bottom-sheet-body">
+        <div class="rs-bundles">
+          {%- for b in section.blocks -%}
+            <div class="rs-bundle{% if b.settings.is_default %} is-selected{% endif %}" data-value="{{ b.settings.variant_id }}" {{ b.shopify_attributes }}>
+              {%- if b.settings.flag != blank -%}
+                <div class="rs-bundle-flag{% if b.settings.flag_gold %} rs-gold{% endif %}">{{ b.settings.flag }}</div>
+              {%- endif -%}
+              <div class="rs-bundle-row">
+                <div class="rs-bundle-radio"></div>
+                <div class="rs-bundle-content">
+                  <div class="rs-bundle-name">{{ b.settings.name }}</div>
+                  <div class="rs-bundle-meta">{{ b.settings.meta }}</div>
+                </div>
+                <div class="rs-bundle-prices">
+                  <div class="rs-price-now">{{ b.settings.price }}</div>
+                  {%- if b.settings.save_badge != blank -%}
+                    <div class="rs-save-badge">{{ b.settings.save_badge }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="rs-stock-bar" style="margin-bottom: 0;">
+          <div class="rs-stock-icon">✓</div>
+          <div class="rs-stock-text">
+            <strong>{{ section.settings.stock_title }}</strong>
+            <span>{{ section.settings.stock_sub }}</span>
+          </div>
+        </div>
+
+        <button class="rs-bottom-sheet-cta">{{ section.settings.sheet_cta }}</button>
+        <p style="text-align: center; font-size: 11px; color: var(--rs-ink-3); margin-top: 12px;">
+          {{ section.settings.sheet_footer }}
+        </p>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "rescens · sticky cta",
+  "tag": "section",
+  "class": "rescens-section-sticky",
+  "settings": [
+    { "type": "image_picker", "id": "thumb", "label": "Produkt-Thumbnail" },
+    { "type": "text", "id": "product_name", "label": "Produkt-Name + Preis", "default": "duo · €44,90" },
+    { "type": "text", "id": "price_meta", "label": "Preis-Meta", "default": "versand heute · klarna verfügbar" },
+    { "type": "text", "id": "cta_label", "label": "CTA Button", "default": "in cart" },
+
+    { "type": "header", "content": "Bottom Sheet" },
+    { "type": "checkbox", "id": "show_sheet", "label": "Bottom Sheet aktivieren", "default": true },
+    { "type": "text", "id": "sheet_title", "label": "Sheet Titel", "default": "variante wählen" },
+    { "type": "text", "id": "stock_title", "label": "Stock Titel", "default": "versand heute" },
+    { "type": "text", "id": "stock_sub", "label": "Stock Sub", "default": "bestellung bis 14 uhr" },
+    { "type": "text", "id": "sheet_cta", "label": "Sheet CTA", "default": "in den warenkorb · €44,90" },
+    { "type": "text", "id": "sheet_footer", "label": "Sheet Footer Note", "default": "60 tage geld zurück · klarna · paypal · apple pay" }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle (in Sheet)",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "duo · 2 flaschen" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "€22,45 / fl · 12 wochen" },
+        { "type": "text", "id": "price", "label": "Preis", "default": "€44,90" },
+        { "type": "text", "id": "save_badge", "label": "Save badge", "default": "spare €29" },
+        { "type": "text", "id": "flag", "label": "Flag", "default": "" },
+        { "type": "checkbox", "id": "flag_gold", "label": "Flag gold", "default": false },
+        { "type": "text", "id": "variant_id", "label": "Variant ID" },
+        { "type": "checkbox", "id": "is_default", "label": "Voreingestellt", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · sticky cta",
+      "category": "rescens",
+      "blocks": [
+        { "type": "bundle", "settings": { "name": "starter · 1 flasche", "meta": "6 wochen routine", "price": "€36,90" } },
+        { "type": "bundle", "settings": { "name": "duo · 2 flaschen", "meta": "€22,45 / fl · 12 wochen", "price": "€44,90", "save_badge": "spare €29", "flag": "beliebteste", "is_default": true } },
+        { "type": "bundle", "settings": { "name": "trio · 3 flaschen", "meta": "€23,30 / fl", "price": "€69,90", "save_badge": "+ etui", "flag": "komplettes ritual", "flag_gold": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

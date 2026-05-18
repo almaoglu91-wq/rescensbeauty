@@ -1,0 +1,69 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-comparison-{{ section.id }}">
+  <section class="rs-section">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+
+    <div class="rs-compare">
+      <div class="rs-compare-row rs-compare-header">
+        <div></div>
+        <div class="rs-us-col">{{ section.settings.col_us }}</div>
+        <div>{{ section.settings.col_classic }}</div>
+        <div>{{ section.settings.col_drugstore }}</div>
+      </div>
+      {%- for b in section.blocks -%}
+        <div class="rs-compare-row" {{ b.shopify_attributes }}>
+          <div class="rs-compare-feature">{{ b.settings.feature }}</div>
+          <div class="rs-compare-cell rs-us">{% if b.settings.us %}<span class="rs-check">✓</span>{% else %}<span class="rs-cross">×</span>{% endif %}</div>
+          <div class="rs-compare-cell">{% if b.settings.classic %}<span class="rs-check">✓</span>{% else %}<span class="rs-cross">×</span>{% endif %}</div>
+          <div class="rs-compare-cell">{% if b.settings.drugstore %}<span class="rs-check">✓</span>{% else %}<span class="rs-cross">×</span>{% endif %}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · comparison",
+  "tag": "section",
+  "class": "rescens-section-comparison",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "direkter vergleich" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>rescens vs <span class=\"rs-accent\">andere.</span></p>" },
+    { "type": "text", "id": "col_us", "label": "Spalte 1 Header (deine Marke)", "default": "rescens" },
+    { "type": "text", "id": "col_classic", "label": "Spalte 2 Header", "default": "klassisch" },
+    { "type": "text", "id": "col_drugstore", "label": "Spalte 3 Header", "default": "drogerie" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Vergleichs-Zeile",
+      "settings": [
+        { "type": "text", "id": "feature", "label": "Feature", "default": "hormonfrei" },
+        { "type": "checkbox", "id": "us", "label": "Spalte 1 ✓", "default": true },
+        { "type": "checkbox", "id": "classic", "label": "Spalte 2 ✓", "default": false },
+        { "type": "checkbox", "id": "drugstore", "label": "Spalte 3 ✓", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · comparison",
+      "category": "rescens",
+      "blocks": [
+        { "type": "row", "settings": { "feature": "hormonfrei", "us": true, "classic": false, "drugstore": true } },
+        { "type": "row", "settings": { "feature": "peptidkomplex 12%", "us": true, "classic": false, "drugstore": false } },
+        { "type": "row", "settings": { "feature": "anwenderstudie n=52", "us": true, "classic": true, "drugstore": false } },
+        { "type": "row", "settings": { "feature": "verträglich bei sensiblen augen", "us": true, "classic": false, "drugstore": false } },
+        { "type": "row", "settings": { "feature": "extensions + lash lift kompatibel", "us": true, "classic": false, "drugstore": false } },
+        { "type": "row", "settings": { "feature": "made in germany", "us": true, "classic": false, "drugstore": false } },
+        { "type": "row", "settings": { "feature": "60 tage geld zurück", "us": true, "classic": false, "drugstore": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

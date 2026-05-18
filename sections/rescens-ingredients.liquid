@@ -1,0 +1,68 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-ingredients-{{ section.id }}">
+  <section class="rs-section">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+
+    <div class="rs-ingredients-grid">
+      {%- for b in section.blocks -%}
+        <div class="rs-ingredient" {{ b.shopify_attributes }}>
+          <div class="rs-ing-photo"{% if b.settings.image %} style="background-image: url('{{ b.settings.image | image_url: width: 400 }}');"{% endif %}></div>
+          <div class="rs-ingredient-body">
+            <div class="rs-ing-name">{{ b.settings.name }}</div>
+            <div class="rs-ing-pct">{{ b.settings.pct }}</div>
+            <p class="rs-ing-desc">{{ b.settings.desc }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.inci_label != blank or section.settings.inci_body != blank -%}
+      <details class="rs-inci">
+        <summary>{{ section.settings.inci_label }}</summary>
+        <div class="rs-inci-body">{{ section.settings.inci_body }}</div>
+      </details>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · ingredients",
+  "tag": "section",
+  "class": "rescens-section-ingredients",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "was drin ist" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>vier peptide. <span class=\"rs-accent\">ein komplex.</span></p>" },
+    { "type": "text", "id": "inci_label", "label": "INCI Akkordeon-Label", "default": "vollständige inci liste" },
+    { "type": "richtext", "id": "inci_body", "label": "INCI Inhalt", "default": "<p>aqua, sodium hyaluronate, pentylene glycol, biotinoyl tripeptide-1, myristoyl pentapeptide-17, panax ginseng extract, swertia japonica extract, panthenol, biotin, cucurbita pepo seed extract, serenoa serrulata fruit extract, oligopeptide-10, acetyl tetrapeptide-3, tocopherol.</p><p><strong>bewusst nicht enthalten:</strong> keine prostaglandin analoga, keine hormone, keine parfumstoffe, keine ätherischen öle, kein alkohol. vegan, leaping bunny.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "ing",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "name", "label": "Name", "default": "peptilash komplex" },
+        { "type": "text", "id": "pct", "label": "% / Tag", "default": "12% der formel" },
+        { "type": "text", "id": "desc", "label": "Beschreibung", "default": "vier signalpeptide." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · ingredients",
+      "category": "rescens",
+      "blocks": [
+        { "type": "ing", "settings": { "name": "peptilash komplex", "pct": "12% der formel", "desc": "vier signalpeptide." } },
+        { "type": "ing", "settings": { "name": "biotin", "pct": "vitamin b7", "desc": "beauty vitamin." } },
+        { "type": "ing", "settings": { "name": "sodium hyaluronate", "pct": "10%", "desc": "intensive feuchtigkeit." } },
+        { "type": "ing", "settings": { "name": "panthenol", "pct": "provitamin b5", "desc": "beruhigt sensitive haut." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

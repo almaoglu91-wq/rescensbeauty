@@ -1,0 +1,61 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-ugc-{{ section.id }}">
+  <section class="rs-section rs-warm">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+    {%- if section.settings.lead != blank -%}
+      <p class="rs-section-lead">{{ section.settings.lead }}</p>
+    {%- endif -%}
+
+    <div class="rs-ugc-scroll">
+      {%- for b in section.blocks -%}
+        {%- if b.settings.link != blank -%}<a href="{{ b.settings.link }}" target="_blank" rel="noopener" class="rs-ugc-card{% if b.settings.is_video %} rs-video{% endif %}" style="{% if b.settings.image %}background-image: url('{{ b.settings.image | image_url: width: 600 }}');{% endif %}" {{ b.shopify_attributes }}>{%- else -%}<div class="rs-ugc-card{% if b.settings.is_video %} rs-video{% endif %}" style="{% if b.settings.image %}background-image: url('{{ b.settings.image | image_url: width: 600 }}');{% endif %}" {{ b.shopify_attributes }}>{%- endif -%}
+          {%- if b.settings.handle != blank -%}
+            <div class="rs-ugc-handle">{{ b.settings.handle }}</div>
+          {%- endif -%}
+        {%- if b.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · ugc carousel",
+  "tag": "section",
+  "class": "rescens-section-ugc",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "rescens + you" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>100k+ routinen <span class=\"rs-accent\">weltweit.</span></p>" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "echte käuferinnen. echte ergebnisse." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "UGC Karte",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild / Video-Thumbnail" },
+        { "type": "text", "id": "handle", "label": "@handle", "default": "@melina.a" },
+        { "type": "checkbox", "id": "is_video", "label": "Als Video markieren", "default": false },
+        { "type": "url", "id": "link", "label": "Externer Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · ugc carousel",
+      "category": "rescens",
+      "blocks": [
+        { "type": "card", "settings": { "handle": "@melina.a", "is_video": true } },
+        { "type": "card", "settings": { "handle": "@jenni.s" } },
+        { "type": "card", "settings": { "handle": "@aya.a", "is_video": true } },
+        { "type": "card", "settings": { "handle": "@leila.k" } },
+        { "type": "card", "settings": { "handle": "@grace.w", "is_video": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

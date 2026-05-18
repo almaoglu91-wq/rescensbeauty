@@ -1,0 +1,44 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-guarantee-{{ section.id }}">
+  <section class="rs-section">
+    <div class="rs-guarantee" data-numeral="{{ section.settings.numeral }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="rs-guarantee-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      <h2 class="rs-guarantee-title">{{ section.settings.title }}</h2>
+      <p class="rs-guarantee-body">{{ section.settings.body }}</p>
+
+      {%- if section.settings.show_sign -%}
+        <div class="rs-guarantee-founder">
+          <div class="rs-founder-avatar-sm"{% if section.settings.sign_avatar %} style="background-image: url('{{ section.settings.sign_avatar | image_url: width: 120 }}');"{% endif %}></div>
+          <div class="rs-founder-sig">
+            <strong>{{ section.settings.sign_name }}</strong>
+            <span>{{ section.settings.sign_role }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · guarantee",
+  "tag": "section",
+  "class": "rescens-section-guarantee",
+  "settings": [
+    { "type": "text", "id": "numeral", "label": "Große Hintergrund-Zahl", "default": "60" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— risiko umkehr" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>60 tage testen. wirkt nicht, <span class=\"rs-accent\">geld zurück.</span></p>" },
+    { "type": "text", "id": "body", "label": "Body", "default": "kein unterschied im spiegel? schreib uns. wir überweisen den vollen kaufpreis. das serum darfst du behalten. keine rücksendung. keine fragen." },
+    { "type": "checkbox", "id": "show_sign", "label": "Signatur anzeigen", "default": true },
+    { "type": "image_picker", "id": "sign_avatar", "label": "Signatur Avatar" },
+    { "type": "text", "id": "sign_name", "label": "Name", "default": "selma & jonas" },
+    { "type": "text", "id": "sign_role", "label": "Rolle", "default": "rescens founders" }
+  ],
+  "presets": [
+    { "name": "rescens · guarantee", "category": "rescens" }
+  ]
+}
+{% endschema %}

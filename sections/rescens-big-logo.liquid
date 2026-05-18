@@ -1,0 +1,21 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-biglogo-{{ section.id }}">
+  <section class="rs-brand-mark-section">
+    <div class="rs-brand-mark">{{ section.settings.text }}</div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · big logo",
+  "tag": "section",
+  "class": "rescens-section-biglogo",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Logo-Text", "default": "rescens" }
+  ],
+  "presets": [
+    { "name": "rescens · big logo", "category": "rescens" }
+  ]
+}
+{% endschema %}

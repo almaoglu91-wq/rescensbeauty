@@ -1,0 +1,46 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-ba-{{ section.id }}">
+  <section class="rs-section">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+    {%- if section.settings.lead != blank -%}
+      <p class="rs-section-lead">{{ section.settings.lead }}</p>
+    {%- endif -%}
+
+    <div class="rs-ba-slider" data-rs-ba>
+      <div class="rs-ba-before"{% if section.settings.before_image %} style="background-image: url('{{ section.settings.before_image | image_url: width: 1000 }}');"{% endif %}></div>
+      <div class="rs-ba-after"{% if section.settings.after_image %} style="background-image: url('{{ section.settings.after_image | image_url: width: 1000 }}');"{% endif %}></div>
+      <div class="rs-ba-divider"><div class="rs-ba-handle"></div></div>
+      <div class="rs-ba-tag rs-before">{{ section.settings.before_label }}</div>
+      <div class="rs-ba-tag rs-after">{{ section.settings.after_label }}</div>
+    </div>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="rs-ba-disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · before/after",
+  "tag": "section",
+  "class": "rescens-section-ba",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "vorher · nachher" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>real, <span class=\"rs-accent\">nicht retuschiert.</span></p>" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "schiebe den regler." },
+    { "type": "image_picker", "id": "before_image", "label": "Vorher Bild (quadratisch)" },
+    { "type": "image_picker", "id": "after_image", "label": "Nachher Bild (quadratisch)" },
+    { "type": "text", "id": "before_label", "label": "Vorher Label", "default": "vorher" },
+    { "type": "text", "id": "after_label", "label": "Nachher Label", "default": "nach 12 wochen" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "verifizierte anwenderin. gleiche person, gleiche beleuchtung, keine mascara. individuelle ergebnisse können variieren." }
+  ],
+  "presets": [
+    { "name": "rescens · before/after", "category": "rescens" }
+  ]
+}
+{% endschema %}

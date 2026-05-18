@@ -1,0 +1,70 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-domino-{{ section.id }}">
+  <section class="rs-section rs-dark">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-domino-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-domino-title">{{ section.settings.title }}</h2>
+    {%- if section.settings.body != blank -%}
+      <div class="rs-domino-body">{{ section.settings.body }}</div>
+    {%- endif -%}
+
+    <ul class="rs-domino-list">
+      {%- for b in section.blocks -%}
+        <li {{ b.shopify_attributes }}>
+          <div class="rs-icon {% if b.settings.kind == 'check' %}rs-check{% else %}rs-x{% endif %}">{% if b.settings.kind == 'check' %}✓{% else %}×{% endif %}</div>
+          <div>
+            <strong>{{ b.settings.title }}</strong>
+            {%- if b.settings.sub != blank -%}<span class="rs-sub">{{ b.settings.sub }}</span>{%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.source != blank -%}
+      <p class="rs-domino-source">{{ section.settings.source }}</p>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · domino (x vs ✓)",
+  "tag": "section",
+  "class": "rescens-section-domino",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— warum peptide statt hormone" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>die meisten lash seren <span class=\"rs-accent\">verändern dein auge.</span></p>" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>klassische wimpernseren wirken über <strong>prostaglandin analoga</strong>. ursprünglich entwickelt zur senkung des augeninnendrucks bei glaukom.</p><p>im juni 2025 stufte das eu sccs die drei hauptanaloga als <strong>nicht sicher</strong> für kosmetik ein.</p><p>rescens nutzt einen anderen weg. vier signalpeptide pflegen die wimpernlinie von außen. keine hormonelle wirkung.</p>" },
+    { "type": "text", "id": "source", "label": "Source/Footnote", "default": "sccs/1635/21 opinion on prostaglandins, eu scientific committee on consumer safety, juni 2025" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Listen-Punkt",
+      "settings": [
+        { "type": "select", "id": "kind", "label": "Typ", "default": "x", "options": [
+          { "value": "x", "label": "×  (Negativ)" },
+          { "value": "check", "label": "✓  (Positiv)" }
+        ]},
+        { "type": "text", "id": "title", "label": "Titel", "default": "hyperpigmentierung der lider" },
+        { "type": "text", "id": "sub", "label": "Sub", "default": "dokumentiert bei prostaglandin analoga" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · domino",
+      "category": "rescens",
+      "blocks": [
+        { "type": "row", "settings": { "kind": "x", "title": "hyperpigmentierung der lider", "sub": "dokumentiert bei prostaglandin analoga" } },
+        { "type": "row", "settings": { "kind": "x", "title": "periorbitale veränderungen", "sub": "sunken eyes durch fettgewebe" } },
+        { "type": "row", "settings": { "kind": "x", "title": "trockene augen, rötungen", "sub": "in studien beobachtet" } },
+        { "type": "row", "settings": { "kind": "x", "title": "abhängigkeit vom produkt", "sub": "rückbildung nach absetzen" } },
+        { "type": "row", "settings": { "kind": "check", "title": "rescens: nur pflege, keine hormone", "sub": "peptide wirken nur an der wimpernlinie" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,131 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-reviews-{{ section.id }}">
+  <section class="rs-section" id="reviews-{{ section.id }}">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+
+    {%- if section.settings.show_summary -%}
+      <div class="rs-reviews-summary">
+        <div class="rs-reviews-score">
+          <div class="rs-reviews-num-big">{{ section.settings.score }}</div>
+          <div class="rs-reviews-side">
+            <div class="rs-stars">{{ section.settings.stars }}</div>
+            <div class="rs-count">{{ section.settings.count_label }}</div>
+          </div>
+        </div>
+        {%- if section.settings.ai_text != blank -%}
+          <div class="rs-ai-eyebrow">{{ section.settings.ai_eyebrow }}</div>
+          <p class="rs-ai-text">{{ section.settings.ai_text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_filters and section.settings.filter_list != blank -%}
+      <div class="rs-filter-scroll">
+        {%- assign filters = section.settings.filter_list | split: ',' -%}
+        {%- for f in filters -%}
+          <div class="rs-filter-pill{% if forloop.first %} is-active{% endif %}">{{ f | strip }}</div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="rs-reviews-list">
+      {%- for b in section.blocks -%}
+        {%- if b.settings.photo -%}
+          <div class="rs-review-card rs-with-photo" {{ b.shopify_attributes }}>
+            <div class="rs-review-photo" style="background-image: url('{{ b.settings.photo | image_url: width: 500 }}');"></div>
+            <div class="rs-review-body-wrap">
+              <div class="rs-review-head">
+                <div class="rs-review-name">{{ b.settings.name }} <span class="rs-verified">verified</span></div>
+                <span class="rs-review-date">{{ b.settings.date }}</span>
+              </div>
+              <div class="rs-stars">{{ b.settings.stars }}</div>
+              <p class="rs-review-body">{{ b.settings.body }}</p>
+              {%- if b.settings.tags != blank -%}
+                <div class="rs-review-meta">
+                  {%- assign tags = b.settings.tags | split: ',' -%}
+                  {%- for t in tags -%}<span class="rs-review-tag">{{ t | strip }}</span>{%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- else -%}
+          <div class="rs-review-card" {{ b.shopify_attributes }}>
+            <div class="rs-review-head">
+              <div class="rs-review-name">{{ b.settings.name }} <span class="rs-verified">verified</span></div>
+              <span class="rs-review-date">{{ b.settings.date }}</span>
+            </div>
+            <div class="rs-stars">{{ b.settings.stars }}</div>
+            <p class="rs-review-body">{{ b.settings.body }}</p>
+            {%- if b.settings.tags != blank -%}
+              <div class="rs-review-meta">
+                {%- assign tags = b.settings.tags | split: ',' -%}
+                {%- for t in tags -%}<span class="rs-review-tag">{{ t | strip }}</span>{%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.load_more_label != blank -%}
+      <button class="rs-reviews-load-more">{{ section.settings.load_more_label }}</button>
+    {%- endif -%}
+
+    {%- if section.settings.omnibus != blank -%}
+      <p class="rs-omnibus">{{ section.settings.omnibus }}</p>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · reviews",
+  "tag": "section",
+  "class": "rescens-section-reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "verifizierte bewertungen" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>50.673 stimmen. <span class=\"rs-accent\">eine routine.</span></p>" },
+    { "type": "checkbox", "id": "show_summary", "label": "Summary-Card anzeigen", "default": true },
+    { "type": "text", "id": "score", "label": "Score (z.B. 4,8)", "default": "4,8" },
+    { "type": "text", "id": "stars", "label": "Sterne", "default": "★★★★★" },
+    { "type": "text", "id": "count_label", "label": "Count Label", "default": "50.673 reviews" },
+    { "type": "text", "id": "ai_eyebrow", "label": "AI Eyebrow", "default": "— ai zusammenfassung" },
+    { "type": "text", "id": "ai_text", "label": "AI Summary", "default": "„kundinnen heben besonders die verträglichkeit bei sensiblen augen hervor. veränderungen meist nach 4 bis 6 wochen.\"" },
+    { "type": "checkbox", "id": "show_filters", "label": "Filter-Pills anzeigen", "default": true },
+    { "type": "text", "id": "filter_list", "label": "Filter (komma-getrennt)", "default": "alle, alter, sensitive augen, extensions, anwendungsdauer" },
+    { "type": "text", "id": "load_more_label", "label": "Load-More CTA", "default": "mehr bewertungen laden · 50.668 weitere" },
+    { "type": "text", "id": "omnibus", "label": "EU-Omnibus Disclosure", "default": "reviews werden nach eu omnibus richtlinie §5b abs. 3 uwg verifiziert über bestätigte bestellnummer." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "melina a." },
+        { "type": "text", "id": "date", "label": "Datum", "default": "15.3.2026" },
+        { "type": "text", "id": "stars", "label": "Sterne", "default": "★★★★★" },
+        { "type": "textarea", "id": "body", "label": "Review Text", "default": "„wenn mir jemand vor 3 monaten gesagt hätte dass ich mal ein wimpernserum feiere hätte ich gelacht. aber here we are.\"" },
+        { "type": "text", "id": "tags", "label": "Tags (komma-getrennt)", "default": "28, sensitive" },
+        { "type": "image_picker", "id": "photo", "label": "Foto (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · reviews",
+      "category": "rescens",
+      "blocks": [
+        { "type": "review", "settings": { "name": "melina a.", "date": "15.3.2026", "body": "„wenn mir jemand vor 3 monaten gesagt hätte dass ich mal ein wimpernserum feiere hätte ich gelacht. aber here we are. meine wimpern sehen einfach gesünder aus.\"", "tags": "28, sensitive" } },
+        { "type": "review", "settings": { "name": "lea r.", "date": "3.3.2026", "body": "„ich wollte kein serum, das stress an meine augen bringt. hormonfrei war mir wichtig, und rescens hat geliefert.\"", "tags": "35, hormonfrei" } },
+        { "type": "review", "settings": { "name": "yara z.", "date": "26.2.2026", "body": "„benutze das serum seit 12 wochen und bin wirklich begeistert. wimpern fühlen sich gepflegter an, brechen weniger, sehen voller aus.\"", "tags": "34, extensions" } },
+        { "type": "review", "settings": { "name": "linda r.", "date": "8.3.2026", "body": "„so woche ich inzwischen morgens auf. mit wimpern, die man endlich sieht. bin 46 und hatte echt sorgen wegen hormone. hier kein thema.\"", "tags": "46, perimenopause" } },
+        { "type": "review", "settings": { "name": "aya a.", "date": "29.11.2025", "body": "„ich hab rescens jetzt 12 wochen benutzt. wimpern sind auf jeden fall länger und voller. keine brennen, keine nebenwirkungen.\"", "tags": "12 wochen" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

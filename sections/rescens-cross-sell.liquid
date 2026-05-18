@@ -1,0 +1,38 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-cross-{{ section.id }}">
+  <section class="rs-section">
+    <div class="rs-crosssell-card">
+      <div class="rs-cs-image"{% if section.settings.image %} style="background-image: url('{{ section.settings.image | image_url: width: 800 }}');"{% endif %}></div>
+      <div class="rs-cs-body">
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="rs-cs-eyebrow">{{ section.settings.eyebrow }}</div>
+        {%- endif -%}
+        <h3 class="rs-cs-title">{{ section.settings.title }}</h3>
+        {%- if section.settings.desc != blank -%}
+          <p class="rs-cs-desc">{{ section.settings.desc }}</p>
+        {%- endif -%}
+        <a class="rs-cs-cta" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · cross-sell card",
+  "tag": "section",
+  "class": "rescens-section-cross",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Bild (16:9)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— häufig gemeinsam gekauft" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "the brow serum" },
+    { "type": "text", "id": "desc", "label": "Beschreibung", "default": "pflegt und stärkt die augenbrauen. gleicher peptilash komplex. auf lager." },
+    { "type": "text", "id": "cta_label", "label": "CTA Text", "default": "€34,90 · ansehen" },
+    { "type": "url", "id": "cta_link", "label": "CTA Link" }
+  ],
+  "presets": [
+    { "name": "rescens · cross-sell card", "category": "rescens" }
+  ]
+}
+{% endschema %}

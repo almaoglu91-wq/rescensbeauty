@@ -1,0 +1,3033 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#F2ECE2">
+<title>rescens · the peptide lash serum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F2ECE2;
+    --bg-warm: #F7F1E6;
+    --bg-soft: #EDE5D6;
+    --card: #FBF7EE;
+    --ink: #1F1D1A;
+    --ink-2: #6B6660;
+    --ink-3: #98928A;
+    --line: #DDD5C4;
+    --line-soft: #E8E1D0;
+    --peach: #EBA88C;
+    --peach-soft: #F4D2BD;
+    --rose: #E9C4B5;
+    --glaze: #F5DBC4;
+    --green: #4A6B5C;
+    --green-soft: #E2E8DD;
+    --red-soft: #D89B8A;
+    --urgent: #C97F5F;
+    --sans: "DM Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    text-transform: lowercase;
+    overflow-x: hidden;
+    padding-bottom: calc(76px + var(--safe-bottom));
+  }
+  a { color: inherit; text-decoration: none; }
+  button, a {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+  }
+  img { max-width: 100%; display: block; }
+
+  .photo {
+    background-color: var(--bg-soft);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* MOCKUP HEADER */
+  .mockup-header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 14px 20px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .mockup-header strong { color: var(--peach-soft); }
+
+  /* TOP BANNER */
+  .top-banner {
+    background: var(--ink);
+    color: var(--bg);
+    text-align: center;
+    padding: 9px 16px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+  }
+  .top-banner strong { font-weight: 500; color: var(--peach-soft); }
+  .top-banner .sep { opacity: 0.35; margin: 0 5px; }
+  .flag::before {
+    content: "";
+    display: inline-block;
+    width: 11px;
+    height: 7px;
+    background: linear-gradient(to bottom, #000 33%, #DD0000 33% 66%, #FFCE00 66%);
+    margin-right: 4px;
+    vertical-align: middle;
+    border-radius: 1px;
+  }
+
+  /* LIVE TICKER */
+  .live-ticker {
+    background: var(--peach-soft);
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .live-ticker .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--urgent);
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .live-ticker strong { font-weight: 500; }
+
+  /* NAV */
+  nav.nav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    align-items: center;
+    padding: 12px 16px;
+  }
+  .nav-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -10px;
+  }
+  .nav-btn:last-child { margin-left: 0; margin-right: -10px; justify-self: end; }
+  .nav-btn svg { width: 22px; height: 22px; stroke: var(--ink); fill: none; stroke-width: 1.4; }
+  .logo {
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+  .cart-count {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background: var(--peach);
+    color: var(--ink);
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-cart-wrap { position: relative; width: 44px; height: 44px; }
+
+  /* HERO */
+  .hero { background: var(--bg); }
+
+  /* GALLERY — full-bleed, snap scroll */
+  .gallery-wrap {
+    position: relative;
+    background: var(--bg);
+  }
+  .gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery-slide {
+    flex: 0 0 100%;
+    aspect-ratio: 1;
+    scroll-snap-align: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-soft);
+  }
+  .gallery-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1631214528200-9c70a8ba1b32?w=900&q=80&auto=format'); }
+  .gallery-slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80&auto=format'); }
+  .gallery-slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=900&q=80&auto=format'); }
+  .gallery-slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=900&q=80&auto=format'); }
+  .gallery-slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1614859520394-d97c79e9b53b?w=900&q=80&auto=format'); }
+  .gallery-slide:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1556228852-80c5dee0fec2?w=900&q=80&auto=format'); }
+  .gallery-slide.video::before {
+    content: "▶";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 64px;
+    height: 64px;
+    background: rgba(31, 29, 26, 0.7);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    backdrop-filter: blur(8px);
+  }
+
+  /* Award stamp on gallery */
+  .award-stamp {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    transform: rotate(-8deg);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    z-index: 2;
+  }
+  .award-stamp strong { font-weight: 500; font-size: 9px; margin: 1px 0; }
+  
+  /* Gallery dots */
+  .gallery-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+  .gallery-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(31, 29, 26, 0.3);
+    border-radius: 50%;
+  }
+  .gallery-dot.active {
+    background: var(--ink);
+    width: 18px;
+    border-radius: 100px;
+  }
+
+  /* Thumbs row */
+  .thumbs-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    padding: 8px 16px 0;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .thumbs-row::-webkit-scrollbar { display: none; }
+  .thumb {
+    flex: 0 0 56px;
+    aspect-ratio: 1;
+    border-radius: 3px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-soft);
+  }
+  .thumb.active { outline: 1.5px solid var(--ink); outline-offset: -1.5px; }
+  .thumb:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1631214528200-9c70a8ba1b32?w=200&q=80&auto=format'); }
+  .thumb:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=200&q=80&auto=format'); }
+  .thumb:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=200&q=80&auto=format'); }
+  .thumb:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=200&q=80&auto=format'); }
+  .thumb:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1614859520394-d97c79e9b53b?w=200&q=80&auto=format'); }
+  .thumb:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1556228852-80c5dee0fec2?w=200&q=80&auto=format'); }
+
+  /* PRODUCT INFO BLOCK */
+  .info-block {
+    padding: 24px 20px 20px;
+  }
+  .press-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .press-line::-webkit-scrollbar { display: none; }
+  .press-line .label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--ink-3);
+    flex-shrink: 0;
+  }
+  .press-line span:not(.label) {
+    font-size: 12px;
+    color: var(--ink-2);
+    letter-spacing: 0.03em;
+    flex-shrink: 0;
+  }
+  .press-line span:not(.label):not(:last-child)::after {
+    content: "·";
+    margin-left: 10px;
+    color: var(--ink-3);
+  }
+
+  .rating-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .stars-display {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .stars-display strong { font-weight: 500; }
+  .rating-meta {
+    font-size: 12px;
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .customer-pill {
+    background: var(--peach-soft);
+    color: var(--ink);
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 100px;
+    letter-spacing: 0.02em;
+  }
+
+  .product-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+  }
+  .product-title {
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .product-title .accent { color: var(--peach); font-weight: 400; }
+  .subhead {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .subhead strong { font-weight: 500; }
+  .subhead .highlight {
+    background: var(--glaze);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* STOCK BAR */
+  .stock-bar {
+    background: var(--card);
+    border: 1.5px solid var(--green);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .stock-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--green-soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .stock-text { flex: 1; font-size: 12px; line-height: 1.4; }
+  .stock-text strong {
+    color: var(--green);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 1px;
+    font-size: 13px;
+  }
+  .stock-text span { color: var(--ink-2); }
+
+  /* BUNDLES */
+  .bundles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .bundle {
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+    min-height: 64px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .bundle.selected {
+    border-color: var(--ink);
+    background: var(--bg-warm);
+  }
+  .bundle-flag {
+    position: absolute;
+    top: -9px;
+    left: 14px;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    font-weight: 500;
+    border-radius: 100px;
+  }
+  .bundle-flag.gold { background: var(--peach); color: var(--ink); }
+  .bundle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .bundle-radio {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--ink-3);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+  }
+  .bundle.selected .bundle-radio { border-color: var(--ink); }
+  .bundle.selected .bundle-radio::after {
+    content: "";
+    position: absolute;
+    inset: 3.5px;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .bundle-content { flex: 1; min-width: 0; }
+  .bundle-name { font-size: 14px; font-weight: 500; line-height: 1.2; margin-bottom: 3px; }
+  .bundle-meta { font-size: 11px; color: var(--ink-2); line-height: 1.4; }
+  .bundle-prices { text-align: right; flex-shrink: 0; }
+  .price-now { font-size: 16px; font-weight: 500; line-height: 1; }
+  .price-per { font-size: 10px; color: var(--ink-2); margin-top: 3px; }
+  .save-badge {
+    background: var(--green-soft);
+    color: var(--green);
+    font-size: 9px;
+    padding: 2px 6px;
+    font-weight: 500;
+    border-radius: 100px;
+    display: inline-block;
+    margin-top: 3px;
+  }
+  .bundle-bonus {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--ink);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.45;
+  }
+  .bundle-bonus::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    background: var(--peach);
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* SUBSCRIPTION TOGGLE */
+  .sub-toggle {
+    background: var(--bg-warm);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .sub-toggle-text {
+    font-size: 11px;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .sub-toggle-text strong {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+  .sub-toggle-text span { color: var(--ink-2); }
+  .sub-switch {
+    width: 44px;
+    height: 26px;
+    background: var(--line);
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .sub-switch::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: var(--bg);
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: left 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .sub-switch.on { background: var(--peach); }
+  .sub-switch.on::after { left: 20px; }
+
+  /* PRICE + KLARNA */
+  .price-line {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .price-line .main {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .klarna-line {
+    font-size: 12px;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .klarna-line strong { color: var(--ink); font-weight: 500; }
+  .klarna-logo {
+    background: #FFA8CD;
+    color: #0E1117;
+    font-weight: 800;
+    font-size: 9px;
+    padding: 3px 6px;
+    border-radius: 3px;
+  }
+
+  /* CTAS */
+  .cta-primary {
+    width: 100%;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 18px 20px;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    border-radius: 100px;
+    min-height: 56px;
+    transition: opacity 0.15s;
+  }
+  .cta-primary:active { opacity: 0.85; transform: scale(0.99); }
+
+  .express-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .cta-express {
+    background: #5A31F4;
+    color: white;
+    padding: 14px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 100px;
+    letter-spacing: 0.03em;
+    min-height: 48px;
+  }
+  .cta-apple {
+    background: #000;
+    color: white;
+    padding: 14px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 100px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .cta-apple::before { content: ""; font-size: 14px; }
+
+  .cta-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    margin-top: 10px;
+    border-radius: 100px;
+    min-height: 48px;
+  }
+
+  /* MICRO TRUST */
+  .micro-trust {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .trust-mini {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.3;
+  }
+  .trust-mini-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    background: var(--peach-soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  .trust-mini strong {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 1px;
+    font-size: 11px;
+  }
+  .trust-mini span { color: var(--ink-2); font-size: 10px; line-height: 1.35; }
+
+  /* LIVE NOTIFICATION */
+  .live-notification {
+    margin-top: 16px;
+    background: var(--bg-warm);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .live-avatars {
+    display: flex;
+    flex-shrink: 0;
+  }
+  .live-avatars span {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid var(--bg-warm);
+    margin-left: -7px;
+  }
+  .live-avatars span:first-child {
+    margin-left: 0;
+    background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80&auto=format');
+  }
+  .live-avatars span:nth-child(2) {
+    background-image: url('https://images.unsplash.com/photo-1573166364266-5e8a14d5f80c?w=80&q=80&auto=format');
+  }
+  .live-avatars span:nth-child(3) {
+    background-image: url('https://images.unsplash.com/photo-1605980776566-0486c3ac7617?w=80&q=80&auto=format');
+  }
+  .live-text {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ink-2);
+    flex: 1;
+  }
+  .live-text strong { color: var(--ink); font-weight: 500; }
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  /* DERMATOLOGIST AUTHORITY */
+  .derm-badge {
+    margin-top: 14px;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 14px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .derm-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-soft);
+    background-size: cover;
+    background-position: center;
+    background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=120&q=80&auto=format');
+    flex-shrink: 0;
+  }
+  .derm-text { flex: 1; font-size: 11px; line-height: 1.45; }
+  .derm-text strong {
+    color: var(--bg);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+  .derm-text span { color: rgba(242, 236, 226, 0.7); }
+
+  /* SECTION BASE */
+  .section { padding: 56px 20px; }
+  .section.dark { background: var(--ink); color: var(--bg); }
+  .section.warm { background: var(--bg-warm); }
+  .section.peach { background: var(--peach-soft); }
+  .section.no-pad { padding: 0; }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    height: 1px;
+    background: var(--ink-3);
+    flex: 0 1 28px;
+    opacity: 0.5;
+  }
+  .section.dark .section-eyebrow { color: rgba(242, 236, 226, 0.5); }
+  .section.dark .section-eyebrow::before, .section.dark .section-eyebrow::after { background: rgba(242, 236, 226, 0.3); }
+
+  .section-title {
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .section-title .accent { color: var(--peach); font-weight: 400; }
+  .section.dark .section-title .accent { color: var(--peach-soft); }
+  .section-lead {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+  .section.dark .section-lead { color: rgba(242, 236, 226, 0.7); }
+
+  /* WAVE */
+  .wave {
+    width: 100%;
+    height: 24px;
+    display: block;
+  }
+  .wave path { stroke: var(--ink); fill: none; stroke-width: 1; }
+  .wave.peach path { stroke: var(--peach); }
+
+  /* STATS — single column horizontal scroll on mobile */
+  .stats-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding: 0 4px;
+    margin: 0 -4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .stats-scroll::-webkit-scrollbar { display: none; }
+  .stat-card {
+    flex: 0 0 80%;
+    background: var(--card);
+    padding: 40px 24px;
+    text-align: center;
+    border-radius: 8px;
+    scroll-snap-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, var(--peach-soft) 0%, transparent 70%);
+    opacity: 0.5;
+  }
+  .stat-num {
+    font-size: 76px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .stat-label {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .stat-study {
+    font-size: 10px;
+    color: var(--ink-3);
+    line-height: 1.55;
+  }
+
+  /* FOUNDER STORY */
+  .founder-photo {
+    aspect-ratio: 4/5;
+    background-image: url('https://images.unsplash.com/photo-1605980776566-0486c3ac7617?w=900&q=80&auto=format');
+    background-color: #D8C9B0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .founder-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(31,29,26,0.4) 100%);
+  }
+  .founder-quote-mark {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-size: 80px;
+    color: var(--bg);
+    line-height: 0.6;
+    z-index: 1;
+  }
+  .founder-text-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--peach);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .founder-title-mobile {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .founder-title-mobile em { font-style: italic; color: var(--peach); font-weight: 400; }
+  .founder-body {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 12px;
+  }
+  .founder-body strong { color: var(--ink); font-weight: 500; }
+  .founder-sign {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .founder-sign-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80&auto=format');
+    background-color: var(--bg-soft);
+    background-size: cover;
+    background-position: center;
+  }
+  .founder-sign-text strong { display: block; font-size: 14px; font-weight: 500; }
+  .founder-sign-text span { font-size: 10px; color: var(--ink-3); letter-spacing: 0.06em; }
+
+  /* DOMINO */
+  .domino-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--peach);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .domino-title-mobile {
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+  }
+  .domino-title-mobile .accent { color: var(--peach-soft); font-weight: 400; }
+  .domino-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(242, 236, 226, 0.85);
+    margin-bottom: 28px;
+  }
+  .domino-body p + p { margin-top: 12px; }
+  .domino-body strong { color: var(--bg); font-weight: 500; }
+  .domino-list { list-style: none; margin-bottom: 24px; }
+  .domino-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(242, 236, 226, 0.15);
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .domino-list li:last-child { border-bottom: none; }
+  .domino-list .icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+  .domino-list .icon.x { background: rgba(216, 155, 138, 0.2); color: var(--red-soft); }
+  .domino-list .icon.check { background: rgba(235, 168, 140, 0.25); color: var(--peach); }
+  .domino-list strong { color: var(--bg); display: block; margin-bottom: 2px; font-weight: 500; font-size: 13px; }
+  .domino-list .sub { color: rgba(242, 236, 226, 0.55); font-size: 11px; line-height: 1.4; }
+  .domino-source {
+    font-size: 10px;
+    color: rgba(242, 236, 226, 0.4);
+    line-height: 1.5;
+  }
+
+  /* COMPARISON — Mobile-specific card design */
+  .compare-mobile {
+    background: var(--card);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .compare-row {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-header {
+    background: var(--bg-warm);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-2);
+    padding: 14px 16px;
+  }
+  .compare-header .us-col {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 6px 4px;
+    border-radius: 4px;
+    text-align: center;
+    margin: -6px 0;
+  }
+  .compare-feature {
+    font-size: 11px;
+    color: var(--ink-2);
+    line-height: 1.3;
+    padding-right: 4px;
+  }
+  .compare-cell { text-align: center; }
+  .compare-cell.us { background: var(--bg-warm); padding: 6px 0; border-radius: 4px; margin: -6px 0; font-weight: 500; }
+  .compare-cell .check { color: var(--green); font-size: 14px; font-weight: 600; }
+  .compare-cell .cross { color: var(--ink-3); font-size: 14px; }
+
+  /* TIMELINE — vertical on mobile */
+  .timeline-vertical {
+    position: relative;
+    padding-left: 80px;
+  }
+  .timeline-vertical::before {
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 24px;
+    bottom: 24px;
+    width: 1px;
+    background: var(--line);
+  }
+  .timeline-step-vertical {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .timeline-step-vertical:last-child { margin-bottom: 0; }
+  .timeline-circle {
+    position: absolute;
+    left: -60px;
+    top: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-soft);
+    border: 3px solid var(--bg-warm);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .timeline-step-vertical:nth-child(1) .timeline-circle { background-image: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=200&q=80&auto=format'); }
+  .timeline-step-vertical:nth-child(2) .timeline-circle { background-image: url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=200&q=80&auto=format'); }
+  .timeline-step-vertical:nth-child(3) .timeline-circle { background-image: url('https://images.unsplash.com/photo-1556228852-80c5dee0fec2?w=200&q=80&auto=format'); }
+  .timeline-step-vertical:nth-child(4) .timeline-circle { background-image: url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=200&q=80&auto=format'); }
+  .timeline-week-tag {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3px 10px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    border-radius: 100px;
+    margin-bottom: 6px;
+  }
+  .timeline-label-mobile {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .timeline-desc-mobile {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+
+  /* BEFORE / AFTER */
+  .ba-slider {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--ink);
+    touch-action: none;
+    user-select: none;
+  }
+  .ba-before, .ba-after {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .ba-before {
+    background-image: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=700&q=80&auto=format');
+    filter: brightness(0.85);
+  }
+  .ba-after {
+    background-image: url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=700&q=80&auto=format');
+    clip-path: inset(0 0 0 50%);
+    filter: brightness(1) contrast(1.05);
+  }
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--bg);
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+    background: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  }
+  .ba-handle::before, .ba-handle::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    position: absolute;
+  }
+  .ba-handle::before { border-right: 9px solid var(--ink); left: 14px; }
+  .ba-handle::after { border-left: 9px solid var(--ink); right: 14px; }
+  .ba-tag {
+    position: absolute;
+    bottom: 14px;
+    background: rgba(31, 29, 26, 0.85);
+    color: var(--bg);
+    padding: 6px 12px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    border-radius: 100px;
+    backdrop-filter: blur(8px);
+    z-index: 3;
+  }
+  .ba-tag.before { left: 14px; }
+  .ba-tag.after { right: 14px; }
+  .ba-disclaimer {
+    text-align: center;
+    font-size: 10px;
+    color: var(--ink-3);
+    margin-top: 14px;
+    line-height: 1.55;
+  }
+
+  /* HOW IT WORKS — single column stacked */
+  .how-card-mobile {
+    background: var(--card);
+    padding: 28px 24px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+  .how-num {
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+    display: block;
+    font-weight: 500;
+  }
+  .how-visual {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--peach-soft);
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .how-visual svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--ink);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .how-title-mobile { font-size: 18px; font-weight: 400; margin-bottom: 10px; }
+  .how-body-mobile { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+
+  /* INGREDIENTS — 2x2 grid */
+  .ingredients-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .ingredient {
+    background: var(--card);
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .ing-photo {
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--peach-soft);
+  }
+  .ingredient:nth-child(1) .ing-photo { background-image: url('https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&q=80&auto=format'); }
+  .ingredient:nth-child(2) .ing-photo { background-image: url('https://images.unsplash.com/photo-1614859520394-d97c79e9b53b?w=300&q=80&auto=format'); }
+  .ingredient:nth-child(3) .ing-photo { background-image: url('https://images.unsplash.com/photo-1601612628452-9e99ced43524?w=300&q=80&auto=format'); }
+  .ingredient:nth-child(4) .ing-photo { background-image: url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=300&q=80&auto=format'); }
+  .ingredient-body { padding: 14px 12px; text-align: center; }
+  .ing-name { font-size: 12px; font-weight: 500; line-height: 1.3; margin-bottom: 3px; }
+  .ing-pct { color: var(--peach); font-weight: 500; font-size: 10px; margin-bottom: 8px; }
+  .ing-desc { font-size: 11px; color: var(--ink-2); line-height: 1.5; }
+  .inci-details {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .inci-details summary {
+    cursor: pointer;
+    padding: 16px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .inci-details summary::-webkit-details-marker { display: none; }
+  .inci-details summary::after { content: "+"; font-size: 18px; font-weight: 300; }
+  .inci-details[open] summary::after { content: "−"; }
+  .inci-body {
+    padding: 0 16px 16px;
+    font-size: 11px;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+
+  /* UGC — horizontal scroll snap */
+  .ugc-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding: 0 4px;
+    margin: 0 -20px;
+    padding: 0 20px 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ugc-scroll::-webkit-scrollbar { display: none; }
+  .ugc-card {
+    flex: 0 0 70%;
+    aspect-ratio: 9/16;
+    background-size: cover;
+    background-position: center;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: center;
+    background-color: var(--bg-soft);
+  }
+  .ugc-card:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1573166364266-5e8a14d5f80c?w=500&q=80&auto=format'); }
+  .ugc-card:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1605980776566-0486c3ac7617?w=500&q=80&auto=format'); }
+  .ugc-card:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1614859520394-d97c79e9b53b?w=500&q=80&auto=format'); }
+  .ugc-card:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=80&auto=format'); }
+  .ugc-card:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=500&q=80&auto=format'); }
+  .ugc-card.video::after {
+    content: "▶";
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    background: rgba(31, 29, 26, 0.7);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    backdrop-filter: blur(8px);
+  }
+  .ugc-handle {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(242, 236, 226, 0.95);
+    padding: 4px 9px;
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 100px;
+  }
+
+  /* STACK OFFER */
+  .stack-items {
+    background: rgba(242, 236, 226, 0.04);
+    border: 1px solid rgba(242, 236, 226, 0.15);
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  .stack-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid rgba(242, 236, 226, 0.1);
+    gap: 12px;
+  }
+  .stack-item:last-child { border-bottom: none; }
+  .stack-item-left { display: flex; gap: 12px; align-items: center; min-width: 0; flex: 1; }
+  .stack-item-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--peach);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .stack-item-name { font-size: 12px; line-height: 1.3; min-width: 0; }
+  .stack-item-name small { color: rgba(242, 236, 226, 0.55); font-size: 10px; display: block; margin-top: 2px; }
+  .stack-item-price { font-size: 11px; color: rgba(242, 236, 226, 0.6); flex-shrink: 0; }
+  .stack-item-price.free { color: var(--peach-soft); font-weight: 500; font-size: 10px; }
+  .stack-total {
+    background: rgba(235, 168, 140, 0.12);
+    padding: 18px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .stack-total-label { font-size: 12px; color: rgba(242, 236, 226, 0.85); }
+  .stack-total-label small { display: block; font-size: 10px; color: rgba(242, 236, 226, 0.5); margin-top: 2px; }
+  .stack-total-old { font-size: 12px; text-decoration: line-through; color: rgba(242, 236, 226, 0.4); margin-right: 8px; }
+  .stack-total-new { font-size: 26px; font-weight: 400; color: var(--bg); }
+  .stack-cta {
+    display: block;
+    background: var(--peach);
+    color: var(--ink);
+    padding: 16px 20px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    border-radius: 100px;
+    text-align: center;
+    margin-top: 28px;
+    min-height: 52px;
+  }
+
+  /* GUARANTEE */
+  .guarantee-block {
+    background: var(--card);
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .guarantee-block::before {
+    content: "60";
+    position: absolute;
+    top: -30px;
+    right: -10px;
+    font-size: 180px;
+    font-weight: 200;
+    color: var(--peach-soft);
+    line-height: 1;
+    opacity: 0.55;
+    z-index: 0;
+  }
+  .guarantee-block > * { position: relative; z-index: 1; }
+  .guarantee-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--peach);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .guarantee-title-mobile {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+  .guarantee-title-mobile .accent { color: var(--peach); font-weight: 400; }
+  .guarantee-body-mobile {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .guarantee-founder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .founder-avatar-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80&auto=format');
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-soft);
+  }
+  .founder-sig-mobile { text-align: left; }
+  .founder-sig-mobile strong { font-size: 13px; font-weight: 500; display: block; }
+  .founder-sig-mobile span { font-size: 10px; color: var(--ink-3); letter-spacing: 0.06em; }
+
+  /* WONDERING HERO */
+  .wondering-hero {
+    aspect-ratio: 4/3;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    background-image: url('https://images.unsplash.com/photo-1522335789203-aaf6b5a4d4c0?w=900&q=80&auto=format');
+    background-color: #8A7A60;
+    background-size: cover;
+    background-position: center;
+  }
+  .wondering-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(31, 29, 26, 0.5) 0%, rgba(31, 29, 26, 0.2) 100%);
+  }
+  .wondering-hero h2 {
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--bg);
+    text-align: center;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+  }
+  .wondering-hero h2 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--peach-soft);
+  }
+
+  /* FAQ */
+  details.faq-item { border-bottom: 1px solid var(--line); }
+  details.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    gap: 16px;
+    line-height: 1.4;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: "+";
+    font-size: 20px;
+    font-weight: 300;
+    flex-shrink: 0;
+    color: var(--ink-2);
+  }
+  details.faq-item[open] summary::after { content: "−"; }
+  .faq-answer {
+    padding: 0 0 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .faq-answer p + p { margin-top: 10px; }
+  .faq-answer strong { color: var(--ink); font-weight: 500; }
+
+  /* WHY EVERYONE TALKS */
+  .why-image {
+    aspect-ratio: 1;
+    background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=700&q=80&auto=format');
+    background-color: #8A7A60;
+    background-size: cover;
+    background-position: center;
+  }
+  .why-content { padding: 36px 24px; }
+  .why-title-mobile {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .why-title-mobile em { color: var(--peach); font-style: normal; font-weight: 400; }
+  .why-lead-mobile {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-bottom: 28px;
+    line-height: 1.55;
+  }
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+  .why-item { display: flex; gap: 14px; align-items: flex-start; }
+  .why-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--card);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .why-icon svg { width: 15px; height: 15px; stroke: var(--ink); fill: none; stroke-width: 1.6; stroke-linecap: round; }
+  .why-content-text strong { font-size: 13px; font-weight: 500; display: block; margin-bottom: 2px; }
+  .why-content-text span { font-size: 12px; color: var(--ink-2); line-height: 1.5; }
+
+  /* REVIEWS */
+  .reviews-summary-mobile {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 28px 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .reviews-score-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .reviews-num-big {
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .reviews-side { text-align: left; }
+  .reviews-side .stars { font-size: 14px; margin-bottom: 4px; }
+  .reviews-side .count { font-size: 11px; color: var(--ink-2); }
+  .ai-summary-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .ai-summary-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink);
+    text-align: left;
+  }
+
+  /* Review filters horizontal scroll */
+  .filter-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    padding: 0 4px;
+    margin: 0 -20px 20px;
+    padding: 0 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filter-scroll::-webkit-scrollbar { display: none; }
+  .filter-pill {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 9px 14px;
+    font-size: 11px;
+    color: var(--ink-2);
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .filter-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .filter-pill::after { content: " ▾"; font-size: 9px; opacity: 0.7; }
+
+  /* Review cards single column on mobile */
+  .reviews-list { display: flex; flex-direction: column; gap: 12px; }
+  .review-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 18px;
+    border-radius: 6px;
+  }
+  .review-card.with-photo { padding: 0; overflow: hidden; }
+  .review-photo {
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-soft);
+    position: relative;
+  }
+  .review-card.with-photo:nth-of-type(1) .review-photo { background-image: url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=400&q=80&auto=format'); }
+  .review-card.with-photo:nth-of-type(3) .review-photo { background-image: url('https://images.unsplash.com/photo-1556228852-80c5dee0fec2?w=400&q=80&auto=format'); }
+  .review-card.with-photo:nth-of-type(5) .review-photo { background-image: url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&q=80&auto=format'); }
+  .review-card.with-photo .review-body-wrap { padding: 16px; }
+  .review-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+  .review-name { font-weight: 500; display: flex; align-items: center; gap: 5px; }
+  .verified {
+    background: var(--peach-soft);
+    color: var(--ink);
+    padding: 2px 5px;
+    font-size: 8px;
+    font-weight: 500;
+    border-radius: 100px;
+  }
+  .review-card .stars { font-size: 10px; margin-bottom: 6px; }
+  .review-body { font-size: 12px; color: var(--ink-2); line-height: 1.55; }
+  .review-meta {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .review-tag {
+    font-size: 9px;
+    color: var(--ink-3);
+    background: var(--bg-warm);
+    padding: 2px 6px;
+    border-radius: 100px;
+  }
+  .review-date { font-size: 10px; color: var(--ink-3); }
+  .reviews-load-more {
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    padding: 14px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    border-radius: 100px;
+    margin-top: 16px;
+    min-height: 48px;
+  }
+  .omnibus-disclosure {
+    font-size: 10px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    border-top: 1px dashed var(--line);
+    padding-top: 16px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* TRUST BADGES */
+  .badge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .trust-badge {
+    background: var(--card);
+    padding: 18px 12px;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid var(--line);
+  }
+  .trust-badge .icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto 8px;
+    background: var(--peach-soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+  .trust-badge .label { font-size: 11px; font-weight: 500; line-height: 1.3; margin-bottom: 2px; }
+  .trust-badge .sub { font-size: 9px; color: var(--ink-3); }
+
+  /* CROSS SELL */
+  .crosssell-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .cs-image {
+    aspect-ratio: 16/9;
+    background-image: url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&q=80&auto=format');
+    background-color: #D8C9B0;
+    background-size: cover;
+    background-position: center;
+  }
+  .cs-body { padding: 20px; }
+  .cs-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .cs-title { font-size: 22px; font-weight: 400; line-height: 1.15; margin-bottom: 4px; }
+  .cs-desc { font-size: 12px; color: var(--ink-2); line-height: 1.5; margin-bottom: 16px; }
+  .cs-cta {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 24px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    border-radius: 100px;
+    min-height: 44px;
+    text-align: center;
+    line-height: 22px;
+  }
+
+  /* COMPLIANCE */
+  .compliance-foot {
+    padding: 32px 20px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .compliance-foot p {
+    font-size: 10px;
+    color: var(--ink-3);
+    line-height: 1.65;
+  }
+
+  /* BIG LOGO */
+  .brand-mark-section {
+    background: var(--bg-warm);
+    overflow: hidden;
+    padding-top: 56px;
+  }
+  .brand-mark {
+    font-size: 28vw;
+    font-weight: 300;
+    line-height: 0.85;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-align: center;
+    white-space: nowrap;
+    margin-bottom: -12vw;
+    user-select: none;
+  }
+
+  /* FOOTER */
+  footer.site-foot {
+    background: var(--bg-warm);
+    padding: 36px 20px 32px;
+    border-top: 1px solid var(--line);
+  }
+  .foot-newsletter { margin-bottom: 28px; }
+  .foot-newsletter h4 {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .foot-newsletter p { font-size: 12px; color: var(--ink-2); line-height: 1.5; margin-bottom: 14px; }
+  .foot-newsletter-form {
+    display: flex;
+    gap: 6px;
+  }
+  .foot-newsletter-input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    font-size: 12px;
+    border-radius: 100px;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .foot-newsletter-btn {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 18px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 100px;
+    min-width: 80px;
+  }
+  .foot-grid-mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .foot-col h4 {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .foot-col p, .foot-col a { font-size: 12px; color: var(--ink-2); line-height: 1.7; display: block; }
+
+  /* STICKY CTA — MAIN MOBILE FEATURE */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    padding-bottom: var(--safe-bottom);
+  }
+  .sticky-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+  .sticky-thumb {
+    width: 46px;
+    height: 46px;
+    background-image: url('https://images.unsplash.com/photo-1631214528200-9c70a8ba1b32?w=120&q=80&auto=format');
+    background-color: var(--bg-soft);
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .sticky-text { flex: 1; min-width: 0; }
+  .sticky-name {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sticky-price { font-size: 11px; color: var(--ink-2); display: flex; align-items: center; gap: 5px; }
+  .sticky-price .green-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  .sticky-btn {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 14px 22px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    border-radius: 100px;
+    flex-shrink: 0;
+    min-height: 50px;
+    min-width: 124px;
+  }
+
+  /* Bottom Sheet (slide-up variant selector) */
+  .bottom-sheet-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 29, 26, 0.6);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .bottom-sheet-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-radius: 16px 16px 0 0;
+    z-index: 201;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding-bottom: calc(20px + var(--safe-bottom));
+  }
+  .bottom-sheet.show { transform: translateY(0); }
+  .bottom-sheet-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--line);
+    border-radius: 100px;
+    margin: 12px auto 16px;
+  }
+  .bottom-sheet-header {
+    padding: 0 20px 16px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bottom-sheet-header h3 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .bottom-sheet-close {
+    width: 32px;
+    height: 32px;
+    background: var(--bg-warm);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--ink-2);
+  }
+  .bottom-sheet-body { padding: 20px; }
+  .bottom-sheet-cta {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 16px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    border-radius: 100px;
+    width: 100%;
+    margin-top: 16px;
+    min-height: 54px;
+  }
+
+  /* Desktop adjustments */
+  @media (min-width: 768px) {
+    body { font-size: 16px; }
+    .section { padding: 80px 32px; }
+    .hero { padding: 16px 0 40px; }
+    .info-block { padding: 32px 32px; max-width: 600px; margin: 0 auto; }
+    .product-title { font-size: 40px; }
+    .section-title { font-size: 40px; }
+    .stats-scroll { justify-content: center; flex-wrap: wrap; }
+    .stat-card { flex: 0 0 calc(33% - 12px); }
+    .ingredients-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .badge-grid { grid-template-columns: repeat(3, 1fr); }
+    .compare-row { padding: 16px 20px; gap: 10px; font-size: 13px; }
+    .compare-feature { font-size: 13px; }
+    .ugc-card { flex: 0 0 30%; }
+    .foot-grid-mobile { grid-template-columns: repeat(4, 1fr); }
+    .gallery-slide { aspect-ratio: 4/5; }
+    .brand-mark { font-size: 22vw; margin-bottom: -10vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOCKUP HEADER -->
+<div class="mockup-header">
+  <strong>mobile first pdp</strong> · 375px optimiert · ios safe area · 48px touch targets · bottom sheet
+</div>
+
+<!-- TOP BANNER -->
+<div class="top-banner">
+  <span class="flag">made in germany</span>
+  <span class="sep">·</span>
+  <strong>versand heute bis 14 uhr</strong>
+</div>
+
+<!-- LIVE TICKER -->
+<div class="live-ticker">
+  <span class="dot"></span><strong>247 frauen</strong> haben heute bereits bestellt
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn" aria-label="menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6 L21 6 M3 12 L21 12 M3 18 L21 18"/></svg>
+    </button>
+    <div class="logo">rescens</div>
+    <div class="nav-cart-wrap">
+      <button class="nav-btn" aria-label="cart">
+        <svg viewBox="0 0 24 24"><path d="M6 6 L19 6 L17 16 L7 16 Z M9 6 Q9 3 12 3 Q15 3 15 6 M9 19 a1 1 0 1 0 0 0.1 M16 19 a1 1 0 1 0 0 0.1"/></svg>
+      </button>
+      <span class="cart-count">1</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- GALLERY SWIPE -->
+  <div class="gallery-wrap">
+    <div class="gallery" id="gallery">
+      <div class="gallery-slide">
+        <div class="award-stamp">elise<br>juliette<br><strong>skin awards</strong><br>winner</div>
+      </div>
+      <div class="gallery-slide"></div>
+      <div class="gallery-slide video"></div>
+      <div class="gallery-slide"></div>
+      <div class="gallery-slide"></div>
+      <div class="gallery-slide"></div>
+    </div>
+    <div class="gallery-dots">
+      <div class="gallery-dot active"></div>
+      <div class="gallery-dot"></div>
+      <div class="gallery-dot"></div>
+      <div class="gallery-dot"></div>
+      <div class="gallery-dot"></div>
+      <div class="gallery-dot"></div>
+    </div>
+  </div>
+
+  <!-- THUMBS -->
+  <div class="thumbs-row">
+    <div class="thumb active"></div>
+    <div class="thumb"></div>
+    <div class="thumb"></div>
+    <div class="thumb"></div>
+    <div class="thumb"></div>
+    <div class="thumb"></div>
+  </div>
+
+  <!-- INFO BLOCK -->
+  <div class="info-block">
+
+    <!-- PRESS -->
+    <div class="press-line">
+      <span class="label">— bekannt aus</span>
+      <span>vogue</span>
+      <span>glamour</span>
+      <span>elle</span>
+      <span>brigitte</span>
+    </div>
+
+    <!-- RATING -->
+    <div class="rating-row">
+      <span class="stars-display"><strong>★★★★★ 4,8</strong></span>
+      <span class="rating-meta">50.673 bewertungen</span>
+      <span class="customer-pill">100k+ kundinnen</span>
+    </div>
+
+    <!-- TITLE -->
+    <div class="product-eyebrow">— the peptide lash serum · 5 ml</div>
+    <h1 class="product-title">sichtbar längere wimpern <span class="accent">in 8 wochen.</span></h1>
+    <p class="subhead">
+      mit dem <strong>rescens peptilash komplex</strong>. <span class="highlight">hormonfrei</span> pflegt die wimpernlinie. ohne prostaglandin analoga.
+    </p>
+
+    <!-- STOCK BAR -->
+    <div class="stock-bar">
+      <div class="stock-icon">✓</div>
+      <div class="stock-text">
+        <strong>auf lager · versand heute</strong>
+        <span>bestelle bis 14 uhr, lieferung morgen mit dhl.</span>
+      </div>
+    </div>
+
+    <!-- BUNDLES -->
+    <div class="bundles">
+
+      <div class="bundle">
+        <div class="bundle-row">
+          <div class="bundle-radio"></div>
+          <div class="bundle-content">
+            <div class="bundle-name">starter · 1 flasche</div>
+            <div class="bundle-meta">6 wochen routine</div>
+          </div>
+          <div class="bundle-prices">
+            <div class="price-now">€36,90</div>
+            <div class="price-per">€36,90 / fl</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bundle selected">
+        <div class="bundle-flag">beliebteste</div>
+        <div class="bundle-row">
+          <div class="bundle-radio"></div>
+          <div class="bundle-content">
+            <div class="bundle-name">duo · 2 flaschen</div>
+            <div class="bundle-meta">12 wochen · volle phase</div>
+          </div>
+          <div class="bundle-prices">
+            <div class="price-now">€44,90</div>
+            <div class="price-per">€22,45 / fl</div>
+            <div class="save-badge">spare €29</div>
+          </div>
+        </div>
+        <div class="bundle-bonus">
+          gratis applikator pinsel + lash recovery protokoll
+        </div>
+      </div>
+
+      <div class="bundle">
+        <div class="bundle-flag gold">komplettes ritual</div>
+        <div class="bundle-row">
+          <div class="bundle-radio"></div>
+          <div class="bundle-content">
+            <div class="bundle-name">trio · 3 flaschen</div>
+            <div class="bundle-meta">16+ wochen routine</div>
+          </div>
+          <div class="bundle-prices">
+            <div class="price-now">€69,90</div>
+            <div class="price-per">€23,30 / fl</div>
+            <div class="save-badge">+ reise etui</div>
+          </div>
+        </div>
+        <div class="bundle-bonus">
+          applikator + protokoll + reise etui + lifetime 15% refill
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SUB TOGGLE -->
+    <div class="sub-toggle">
+      <div class="sub-toggle-text">
+        <strong>refill alle 8 wochen · spare 15%</strong>
+        <span>jederzeit pausieren oder kündigen.</span>
+      </div>
+      <div class="sub-switch" id="subSwitch"></div>
+    </div>
+
+    <!-- PRICE -->
+    <div class="price-line">
+      <span class="main">€44,90</span>
+    </div>
+    <div class="klarna-line">
+      oder 3× <strong>€14,97</strong> mit <span class="klarna-logo">klarna</span>
+    </div>
+
+    <!-- CTA -->
+    <button class="cta-primary">in den warenkorb · €44,90</button>
+
+    <div class="express-row">
+      <button class="cta-express">shop pay</button>
+      <button class="cta-apple">apple pay</button>
+    </div>
+
+    <button class="cta-secondary">routine quiz · 60 sek</button>
+
+    <!-- MICRO TRUST -->
+    <div class="micro-trust">
+      <div class="trust-mini">
+        <div class="trust-mini-icon">✓</div>
+        <div>
+          <strong>60 tage geld zurück</strong>
+          <span>keine rücksendung</span>
+        </div>
+      </div>
+      <div class="trust-mini">
+        <div class="trust-mini-icon">⚡</div>
+        <div>
+          <strong>versand heute</strong>
+          <span>bis 14 uhr</span>
+        </div>
+      </div>
+      <div class="trust-mini">
+        <div class="trust-mini-icon">★</div>
+        <div>
+          <strong>dermatest sehr gut</strong>
+          <span>sensible augen ok</span>
+        </div>
+      </div>
+      <div class="trust-mini">
+        <div class="trust-mini-icon">🔒</div>
+        <div>
+          <strong>sicher zahlen</strong>
+          <span>klarna · paypal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE NOTIFICATION -->
+    <div class="live-notification">
+      <div class="live-dot"></div>
+      <div class="live-avatars">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="live-text">
+        <strong>melina, lea und 245 andere</strong> haben heute bestellt
+      </div>
+    </div>
+
+    <!-- DERMATOLOGIST -->
+    <div class="derm-badge">
+      <div class="derm-avatar"></div>
+      <div class="derm-text">
+        <strong>dr. med. stefan müller, augenarzt</strong>
+        <span>"hormonfreie pflege, die ich bei sensiblen augen empfehlen kann."</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none">
+  <path d="M0,20 Q120,5 240,20 T480,20 T720,20 T960,20 T1200,20 T1440,20"/>
+</svg>
+
+<!-- STATS -->
+<section class="section">
+  <div class="section-eyebrow">echte ergebnisse</div>
+  <h2 class="section-title">die zahlen <span class="accent">aus 8 wochen.</span></h2>
+  <p class="section-lead">anwenderstudie unter dermatologischer kontrolle. n=52, 8 wochen.</p>
+
+  <div class="stats-scroll">
+    <div class="stat-card">
+      <div class="stat-num">85%</div>
+      <div class="stat-label">bestätigen sichtbar längere wimpern</div>
+      <div class="stat-study">n=52, 8 wochen, testinstitut 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">80%</div>
+      <div class="stat-label">bestätigen voller wirkende wimpern</div>
+      <div class="stat-study">n=52, 8 wochen, testinstitut 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">96%</div>
+      <div class="stat-label">würden rescens weiterempfehlen</div>
+      <div class="stat-study">n=52, 8 wochen, testinstitut 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER STORY -->
+<section class="section warm">
+  <div class="founder-photo">
+    <div class="founder-quote-mark">"</div>
+  </div>
+  <div class="founder-text-eyebrow">— die geschichte hinter rescens</div>
+  <h2 class="founder-title-mobile">wir haben rescens gebaut, weil wir <em>selbst nichts vertrauen konnten.</em></h2>
+  <p class="founder-body">
+    ich habe drei jahre lang hormonelle wimpernseren probiert. die wirkung war da. dunkle augenringe und trockene augen waren auch da.
+  </p>
+  <p class="founder-body">
+    <strong>ich wollte ein serum, das pflegt statt verändert.</strong> formuliert in deutschland, ohne prostaglandin analoga, getestet bei sensiblen augen. das gab es nicht. also haben wir es gemacht.
+  </p>
+  <p class="founder-body">
+    rescens ist für jede frau, die wimpern will, aber nicht ihr auge dafür gibt.
+  </p>
+
+  <div class="founder-sign">
+    <div class="founder-sign-avatar"></div>
+    <div class="founder-sign-text">
+      <strong>selma & jonas</strong>
+      <span>rescens founders · hamburg</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOMINO -->
+<section class="section dark">
+  <div class="domino-eyebrow">— warum peptide statt hormone</div>
+  <h2 class="domino-title-mobile">
+    die meisten lash seren <span class="accent">verändern dein auge.</span>
+  </h2>
+  <div class="domino-body">
+    <p>
+      klassische wimpernseren wirken über <strong>prostaglandin analoga</strong>. ursprünglich entwickelt zur senkung des augeninnendrucks bei glaukom.
+    </p>
+    <p>
+      im juni 2025 stufte das eu sccs die drei hauptanaloga als <strong>nicht sicher</strong> für kosmetik ein.
+    </p>
+    <p>
+      rescens nutzt einen anderen weg. vier signalpeptide pflegen die wimpernlinie von außen. keine hormonelle wirkung.
+    </p>
+  </div>
+
+  <ul class="domino-list">
+    <li>
+      <div class="icon x">×</div>
+      <div>
+        <strong>hyperpigmentierung der lider</strong>
+        <span class="sub">dokumentiert bei prostaglandin analoga</span>
+      </div>
+    </li>
+    <li>
+      <div class="icon x">×</div>
+      <div>
+        <strong>periorbitale veränderungen</strong>
+        <span class="sub">sunken eyes durch fettgewebe</span>
+      </div>
+    </li>
+    <li>
+      <div class="icon x">×</div>
+      <div>
+        <strong>trockene augen, rötungen</strong>
+        <span class="sub">in studien beobachtet</span>
+      </div>
+    </li>
+    <li>
+      <div class="icon x">×</div>
+      <div>
+        <strong>abhängigkeit vom produkt</strong>
+        <span class="sub">rückbildung nach absetzen</span>
+      </div>
+    </li>
+    <li>
+      <div class="icon check">✓</div>
+      <div>
+        <strong>rescens: nur pflege, keine hormone</strong>
+        <span class="sub">peptide wirken nur an der wimpernlinie</span>
+      </div>
+    </li>
+  </ul>
+
+  <p class="domino-source">
+    sccs/1635/21 opinion on prostaglandins, eu scientific committee on consumer safety, juni 2025
+  </p>
+</section>
+
+<!-- COMPARISON MOBILE -->
+<section class="section">
+  <div class="section-eyebrow">direkter vergleich</div>
+  <h2 class="section-title">rescens vs <span class="accent">andere.</span></h2>
+
+  <div class="compare-mobile">
+    <div class="compare-row compare-header">
+      <div></div>
+      <div class="us-col">rescens</div>
+      <div>klassisch</div>
+      <div>drogerie</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature">hormonfrei</div>
+      <div class="compare-cell us"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+      <div class="compare-cell"><span class="check">✓</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature">peptidkomplex 12%</div>
+      <div class="compare-cell us"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature">anwenderstudie n=52</div>
+      <div class="compare-cell us"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature">verträglich bei sensiblen augen</div>
+      <div class="compare-cell us"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature">extensions + lash lift kompatibel</div>
+      <div class="compare-cell us"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature">made in germany</div>
+      <div class="compare-cell us"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature">60 tage geld zurück</div>
+      <div class="compare-cell us"><span class="check">✓</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+      <div class="compare-cell"><span class="cross">×</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE VERTICAL -->
+<section class="section warm">
+  <div class="section-eyebrow">deine routine</div>
+  <h2 class="section-title">im <span class="accent">zeitverlauf.</span></h2>
+  <p class="section-lead">realistische erwartungen schützen vor frust.</p>
+
+  <div class="timeline-vertical">
+    <div class="timeline-step-vertical">
+      <div class="timeline-circle"></div>
+      <span class="timeline-week-tag">woche 4</span>
+      <div class="timeline-label-mobile">frühe pflege phase</div>
+      <div class="timeline-desc-mobile">wimpern wirken weicher und geschmeidiger. reduzierte brüchigkeit.</div>
+    </div>
+    <div class="timeline-step-vertical">
+      <div class="timeline-circle"></div>
+      <span class="timeline-week-tag">woche 8</span>
+      <div class="timeline-label-mobile">sichtbare länge</div>
+      <div class="timeline-desc-mobile">mehrheit berichtet sichtbar längere und dichter wirkende wimpern.</div>
+    </div>
+    <div class="timeline-step-vertical">
+      <div class="timeline-circle"></div>
+      <span class="timeline-week-tag">woche 12</span>
+      <div class="timeline-label-mobile">peak ergebnis</div>
+      <div class="timeline-desc-mobile">volle wirkung der pflege routine. wimpernlinie wirkt definierter.</div>
+    </div>
+    <div class="timeline-step-vertical">
+      <div class="timeline-circle"></div>
+      <span class="timeline-week-tag">woche 16+</span>
+      <div class="timeline-label-mobile">maintenance</div>
+      <div class="timeline-desc-mobile">reduzierte anwendung. ergebnis stabil halten. routine als ritual.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="section">
+  <div class="section-eyebrow">vorher · nachher</div>
+  <h2 class="section-title">real, <span class="accent">nicht retuschiert.</span></h2>
+  <p class="section-lead">schiebe den regler.</p>
+
+  <div class="ba-slider" id="baSlider">
+    <div class="ba-before"></div>
+    <div class="ba-after"></div>
+    <div class="ba-divider"><div class="ba-handle"></div></div>
+    <div class="ba-tag before">vorher</div>
+    <div class="ba-tag after">nach 12 wochen</div>
+  </div>
+  <p class="ba-disclaimer">
+    verifizierte anwenderin. gleiche person, gleiche beleuchtung, keine mascara. individuelle ergebnisse können variieren.
+  </p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section warm">
+  <div class="section-eyebrow">die routine</div>
+  <h2 class="section-title">drei schritte. <span class="accent">zehn sekunden.</span></h2>
+
+  <div class="how-card-mobile">
+    <span class="how-num">01 — auftragen</span>
+    <div class="how-visual">
+      <svg viewBox="0 0 40 40"><path d="M10 30 L30 10 M28 8 L32 12"/><circle cx="30" cy="10" r="2.5"/></svg>
+    </div>
+    <h3 class="how-title-mobile">auftragen</h3>
+    <p class="how-body-mobile">präzisions pinsel am wimpernkranz entlang. wie ein feiner eyeliner. nicht ins auge.</p>
+  </div>
+  <div class="how-card-mobile">
+    <span class="how-num">02 — einziehen</span>
+    <div class="how-visual">
+      <svg viewBox="0 0 40 40"><path d="M8 25 Q20 12 32 25"/><circle cx="20" cy="28" r="2"/></svg>
+    </div>
+    <h3 class="how-title-mobile">einziehen lassen</h3>
+    <p class="how-body-mobile">30 sekunden trocknen. dann normale pflege routine. mascara wie gewohnt morgens.</p>
+  </div>
+  <div class="how-card-mobile">
+    <span class="how-num">03 — sichtbar</span>
+    <div class="how-visual">
+      <svg viewBox="0 0 40 40"><path d="M6 20 L34 20"/><path d="M10 17 L10 23 M18 15 L18 25 M26 17 L26 23 M34 18 L34 22"/></svg>
+    </div>
+    <h3 class="how-title-mobile">sichtbar in 8 wochen</h3>
+    <p class="how-body-mobile">konsistenz schlägt intensität. eine flasche ca. 6 wochen. volle routine 8 bis 12 wochen.</p>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="section">
+  <div class="section-eyebrow">was drin ist</div>
+  <h2 class="section-title">vier peptide. <span class="accent">ein komplex.</span></h2>
+
+  <div class="ingredients-grid">
+    <div class="ingredient">
+      <div class="ing-photo"></div>
+      <div class="ingredient-body">
+        <div class="ing-name">peptilash komplex</div>
+        <div class="ing-pct">12% der formel</div>
+        <p class="ing-desc">vier signalpeptide.</p>
+      </div>
+    </div>
+    <div class="ingredient">
+      <div class="ing-photo"></div>
+      <div class="ingredient-body">
+        <div class="ing-name">biotin</div>
+        <div class="ing-pct">vitamin b7</div>
+        <p class="ing-desc">beauty vitamin.</p>
+      </div>
+    </div>
+    <div class="ingredient">
+      <div class="ing-photo"></div>
+      <div class="ingredient-body">
+        <div class="ing-name">sodium hyaluronate</div>
+        <div class="ing-pct">10%</div>
+        <p class="ing-desc">intensive feuchtigkeit.</p>
+      </div>
+    </div>
+    <div class="ingredient">
+      <div class="ing-photo"></div>
+      <div class="ingredient-body">
+        <div class="ing-name">panthenol</div>
+        <div class="ing-pct">provitamin b5</div>
+        <p class="ing-desc">beruhigt sensitive haut.</p>
+      </div>
+    </div>
+  </div>
+
+  <details class="inci-details">
+    <summary>vollständige inci liste</summary>
+    <div class="inci-body">
+      aqua, sodium hyaluronate, pentylene glycol, biotinoyl tripeptide-1, myristoyl pentapeptide-17, panax ginseng extract, swertia japonica extract, panthenol, biotin, cucurbita pepo seed extract, serenoa serrulata fruit extract, oligopeptide-10, acetyl tetrapeptide-3, tocopherol.
+      <p style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line);"><strong style="color: var(--ink)">bewusst nicht enthalten:</strong> keine prostaglandin analoga, keine hormone, keine parfumstoffe, keine ätherischen öle, kein alkohol. vegan, leaping bunny.</p>
+    </div>
+  </details>
+</section>
+
+<!-- UGC HORIZONTAL SCROLL -->
+<section class="section warm">
+  <div class="section-eyebrow">rescens + you</div>
+  <h2 class="section-title">100k+ routinen <span class="accent">weltweit.</span></h2>
+  <p class="section-lead">echte käuferinnen. echte ergebnisse.</p>
+
+  <div class="ugc-scroll">
+    <div class="ugc-card video"><div class="ugc-handle">@melina.a</div></div>
+    <div class="ugc-card"><div class="ugc-handle">@jenni.s</div></div>
+    <div class="ugc-card video"><div class="ugc-handle">@aya.a</div></div>
+    <div class="ugc-card"><div class="ugc-handle">@leila.k</div></div>
+    <div class="ugc-card video"><div class="ugc-handle">@grace.w</div></div>
+  </div>
+</section>
+
+<!-- STACK OFFER -->
+<section class="section dark">
+  <div class="section-eyebrow">duo · komplettpaket</div>
+  <h2 class="section-title">mehr als ein serum. <span class="accent">eine routine.</span></h2>
+  <p class="section-lead">du bestellst kein produkt. du startest eine transformation.</p>
+
+  <div class="stack-items">
+    <div class="stack-item">
+      <div class="stack-item-left">
+        <div class="stack-item-icon">1</div>
+        <div class="stack-item-name">peptide lash serum 5ml<small>hauptprodukt</small></div>
+      </div>
+      <div class="stack-item-price">€36,90</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-item-left">
+        <div class="stack-item-icon">2</div>
+        <div class="stack-item-name">applikator pinsel<small>spart produkt</small></div>
+      </div>
+      <div class="stack-item-price free">+ €12</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-item-left">
+        <div class="stack-item-icon">3</div>
+        <div class="stack-item-name">recovery protokoll<small>8 wochen anleitung</small></div>
+      </div>
+      <div class="stack-item-price free">+ €19</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-item-left">
+        <div class="stack-item-icon">4</div>
+        <div class="stack-item-name">email begleitung<small>6 wochen</small></div>
+      </div>
+      <div class="stack-item-price free">+ €29</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-item-left">
+        <div class="stack-item-icon">5</div>
+        <div class="stack-item-name">lifetime refill 15%<small>für folgebestellungen</small></div>
+      </div>
+      <div class="stack-item-price free">+ €60</div>
+    </div>
+  </div>
+
+  <div class="stack-total">
+    <div class="stack-total-label">gesamtwert €156+<small>dein preis heute</small></div>
+    <div><span class="stack-total-old">€156</span><span class="stack-total-new">€44,90</span></div>
+  </div>
+
+  <a class="stack-cta" href="#top">jetzt sichern · versand heute</a>
+</section>
+
+<!-- GUARANTEE -->
+<section class="section">
+  <div class="guarantee-block">
+    <div class="guarantee-eyebrow">— risiko umkehr</div>
+    <h2 class="guarantee-title-mobile">60 tage testen. wirkt nicht, <span class="accent">geld zurück.</span></h2>
+    <p class="guarantee-body-mobile">
+      kein unterschied im spiegel? schreib uns. wir überweisen den vollen kaufpreis. das serum darfst du behalten. keine rücksendung. keine fragen.
+    </p>
+    <div class="guarantee-founder">
+      <div class="founder-avatar-sm"></div>
+      <div class="founder-sig-mobile">
+        <strong>selma & jonas</strong>
+        <span>rescens founders</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WONDERING / FAQ -->
+<section class="section warm">
+  <div class="wondering-hero">
+    <h2>in case <em>you are</em> wondering...</h2>
+  </div>
+
+  <details class="faq-item" open>
+    <summary>funktioniert es wirklich ohne hormone</summary>
+    <div class="faq-answer">
+      <p>ja. rescens wirkt über vier signalpeptide, die die wimpernlinie pflegen und stärken. ohne prostaglandin analoga.</p>
+      <p>in unserer anwenderstudie bestätigten <strong>85% sichtbar längere wimpern</strong> nach 8 wochen.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary>wann sehe ich erste ergebnisse</summary>
+    <div class="faq-answer">
+      <p>erste veränderungen meist nach <strong>4 bis 6 wochen</strong>. volle routine 8 bis 12 wochen.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary>sicherheit und nebenwirkungen</summary>
+    <div class="faq-answer">
+      <p>dermatologisch getestet, dermatest "sehr gut". frei von prostaglandin analoga, hormonen, parfum. verträglich bei sensiblen augen.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary>kompatibel mit extensions und lash lift</summary>
+    <div class="faq-answer">
+      <p>ja. oil free formuliert. greift verlängerungen nicht an. besonders zur pflege nach extensions geeignet.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary>schwangerschaft und stillzeit</summary>
+    <div class="faq-answer">
+      <p>rücksprache mit deiner ärztin empfohlen. das serum ist hormonfrei formuliert.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary>wie lange hält eine flasche</summary>
+    <div class="faq-answer">
+      <p>eine 5 ml flasche reicht bei täglicher anwendung ca. 6 bis 8 wochen.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary>versand und rückgabe</summary>
+    <div class="faq-answer">
+      <p>versand heute bei bestellung bis 14 uhr. lieferung 1 bis 2 werktage. kostenlos ab 40 euro. 14 tage widerrufsrecht plus 60 tage wirkungs garantie.</p>
+    </div>
+  </details>
+</section>
+
+<!-- WHY -->
+<section class="section no-pad peach">
+  <div class="why-image"></div>
+  <div class="why-content">
+    <h2 class="why-title-mobile">warum alle <em>darüber reden.</em></h2>
+    <p class="why-lead-mobile">wir machen ein produkt. aber das richtige.</p>
+
+    <ul class="why-list">
+      <li class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 16 16"><path d="M3 8 L7 12 L13 4"/></svg></div>
+        <div class="why-content-text">
+          <strong>kein risiko</strong>
+          <span>nicht verliebt? geld zurück. kein drama.</span>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 16 16"><polygon points="8,2 10,6.5 14.5,7 11,10.5 12,15 8,12.5 4,15 5,10.5 1.5,7 6,6.5"/></svg></div>
+        <div class="why-content-text">
+          <strong>100k+ sind schon dabei</strong>
+          <span>die meisten bleiben.</span>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 16 16"><path d="M8 14 L3 9 Q1 7 3 5 Q5 3 8 6 Q11 3 13 5 Q15 7 13 9 Z"/></svg></div>
+        <div class="why-content-text">
+          <strong>vegan & cruelty free</strong>
+          <span>weil das standard sein sollte.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews">
+  <div class="section-eyebrow">verifizierte bewertungen</div>
+  <h2 class="section-title">50.673 stimmen. <span class="accent">eine routine.</span></h2>
+
+  <div class="reviews-summary-mobile">
+    <div class="reviews-score-row">
+      <div class="reviews-num-big">4,8</div>
+      <div class="reviews-side">
+        <div class="stars">★★★★★</div>
+        <div class="count">50.673 reviews</div>
+      </div>
+    </div>
+    <div class="ai-summary-eyebrow">— ai zusammenfassung</div>
+    <p class="ai-summary-text">"kundinnen heben besonders die verträglichkeit bei sensiblen augen hervor. veränderungen meist nach 4 bis 6 wochen."</p>
+  </div>
+
+  <div class="filter-scroll">
+    <div class="filter-pill active">alle</div>
+    <div class="filter-pill">alter</div>
+    <div class="filter-pill">sensitive augen</div>
+    <div class="filter-pill">extensions</div>
+    <div class="filter-pill">anwendungsdauer</div>
+  </div>
+
+  <div class="reviews-list">
+    <div class="review-card with-photo">
+      <div class="review-photo"></div>
+      <div class="review-body-wrap">
+        <div class="review-head">
+          <div class="review-name">melina a. <span class="verified">verified</span></div>
+          <span class="review-date">15.3.2026</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="review-body">"wenn mir jemand vor 3 monaten gesagt hätte dass ich mal ein wimpernserum feiere hätte ich gelacht. aber here we are. meine wimpern sehen einfach gesünder aus."</p>
+        <div class="review-meta">
+          <span class="review-tag">28</span>
+          <span class="review-tag">sensitive</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-head">
+        <div class="review-name">lea r. <span class="verified">verified</span></div>
+        <span class="review-date">3.3.2026</span>
+      </div>
+      <div class="stars">★★★★★</div>
+      <p class="review-body">"ich wollte kein serum, das stress an meine augen bringt. hormonfrei war mir wichtig, und rescens hat geliefert. meine wimpern fühlen sich gepflegter an."</p>
+      <div class="review-meta">
+        <span class="review-tag">35</span>
+        <span class="review-tag">hormonfrei</span>
+      </div>
+    </div>
+
+    <div class="review-card with-photo">
+      <div class="review-photo"></div>
+      <div class="review-body-wrap">
+        <div class="review-head">
+          <div class="review-name">yara z. <span class="verified">verified</span></div>
+          <span class="review-date">26.2.2026</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="review-body">"benutze das serum seit 12 wochen und bin wirklich begeistert. wimpern fühlen sich gepflegter an, brechen weniger, sehen voller aus."</p>
+        <div class="review-meta">
+          <span class="review-tag">34</span>
+          <span class="review-tag">extensions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-head">
+        <div class="review-name">linda r. <span class="verified">verified</span></div>
+        <span class="review-date">8.3.2026</span>
+      </div>
+      <div class="stars">★★★★★</div>
+      <p class="review-body">"so woche ich inzwischen morgens auf. mit wimpern, die man endlich sieht. bin 46 und hatte echt sorgen wegen hormone. hier kein thema."</p>
+      <div class="review-meta">
+        <span class="review-tag">46</span>
+        <span class="review-tag">perimenopause</span>
+      </div>
+    </div>
+
+    <div class="review-card with-photo">
+      <div class="review-photo"></div>
+      <div class="review-body-wrap">
+        <div class="review-head">
+          <div class="review-name">aya a. <span class="verified">verified</span></div>
+          <span class="review-date">29.11.2025</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="review-body">"ich hab rescens jetzt 12 wochen benutzt. wimpern sind auf jeden fall länger und voller. keine brennen, keine nebenwirkungen."</p>
+        <div class="review-meta">
+          <span class="review-tag">12 wochen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="reviews-load-more">mehr bewertungen laden · 50.668 weitere</button>
+
+  <p class="omnibus-disclosure">
+    reviews werden nach eu omnibus richtlinie §5b abs. 3 uwg verifiziert über bestätigte bestellnummer.
+  </p>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="section warm">
+  <div class="section-eyebrow">vertrauen</div>
+  <h2 class="section-title">geprüft. <span class="accent">zertifiziert.</span></h2>
+
+  <div class="badge-grid" style="margin-top: 36px;">
+    <div class="trust-badge"><div class="icon">✓</div><div class="label">trusted shops</div><div class="sub">käuferschutz</div></div>
+    <div class="trust-badge"><div class="icon">★</div><div class="label">dermatest</div><div class="sub">sehr gut</div></div>
+    <div class="trust-badge"><div class="icon">v</div><div class="label">v label</div><div class="sub">vegan</div></div>
+    <div class="trust-badge"><div class="icon">♡</div><div class="label">leaping bunny</div><div class="sub">cruelty free</div></div>
+    <div class="trust-badge"><div class="icon">⌂</div><div class="label">made in germany</div><div class="sub">formuliert in de</div></div>
+    <div class="trust-badge"><div class="icon">€</div><div class="label">klarna · paypal</div><div class="sub">sicher zahlen</div></div>
+  </div>
+</section>
+
+<!-- CROSS SELL -->
+<section class="section">
+  <div class="crosssell-card">
+    <div class="cs-image"></div>
+    <div class="cs-body">
+      <div class="cs-eyebrow">— häufig gemeinsam gekauft</div>
+      <h3 class="cs-title">the brow serum</h3>
+      <p class="cs-desc">pflegt und stärkt die augenbrauen. gleicher peptilash komplex. auf lager.</p>
+      <a class="cs-cta" href="#">€34,90 · ansehen</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section class="compliance-foot">
+  <p>
+    *anwenderstudie unter dermatologischer kontrolle, n=52, 8-wöchige anwendung, testinstitut 2025. subjektive bewertung. individuelle ergebnisse können variieren. kein erfolgsversprechen. eu kosmetikverordnung 1223/2009.
+  </p>
+</section>
+
+<!-- BIG LOGO -->
+<section class="brand-mark-section">
+  <div class="brand-mark">rescens</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-foot">
+  <div class="foot-newsletter">
+    <h4>newsletter</h4>
+    <p>einblicke, drops und besondere angebote direkt in dein postfach.</p>
+    <div class="foot-newsletter-form">
+      <input class="foot-newsletter-input" placeholder="email adresse" />
+      <button class="foot-newsletter-btn">join</button>
+    </div>
+  </div>
+  <div class="foot-grid-mobile">
+    <div class="foot-col">
+      <h4>navigate</h4>
+      <a href="#">alle produkte</a>
+      <a href="#">routine quiz</a>
+      <a href="#">journal</a>
+    </div>
+    <div class="foot-col">
+      <h4>socials</h4>
+      <a href="#">instagram</a>
+      <a href="#">tiktok</a>
+      <a href="#">pinterest</a>
+    </div>
+    <div class="foot-col">
+      <h4>quick links</h4>
+      <a href="#">affiliate</a>
+      <a href="#">garantie</a>
+      <a href="#">versand</a>
+    </div>
+    <div class="foot-col">
+      <h4>support</h4>
+      <p>mo–fr 9–17 uhr<br>hello@rescens.de</p>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta">
+  <div class="sticky-inner">
+    <div class="sticky-thumb"></div>
+    <div class="sticky-text">
+      <div class="sticky-name">duo · €44,90</div>
+      <div class="sticky-price"><span class="green-dot"></span>versand heute · klarna verfügbar</div>
+    </div>
+    <button class="sticky-btn" id="openSheet">in cart</button>
+  </div>
+</div>
+
+<!-- BOTTOM SHEET -->
+<div class="bottom-sheet-overlay" id="overlay"></div>
+<div class="bottom-sheet" id="sheet">
+  <div class="bottom-sheet-handle"></div>
+  <div class="bottom-sheet-header">
+    <h3>variante wählen</h3>
+    <button class="bottom-sheet-close" id="closeSheet">×</button>
+  </div>
+  <div class="bottom-sheet-body">
+
+    <div class="bundles">
+      <div class="bundle">
+        <div class="bundle-row">
+          <div class="bundle-radio"></div>
+          <div class="bundle-content">
+            <div class="bundle-name">starter · 1 flasche</div>
+            <div class="bundle-meta">6 wochen routine</div>
+          </div>
+          <div class="bundle-prices">
+            <div class="price-now">€36,90</div>
+          </div>
+        </div>
+      </div>
+      <div class="bundle selected">
+        <div class="bundle-flag">beliebteste</div>
+        <div class="bundle-row">
+          <div class="bundle-radio"></div>
+          <div class="bundle-content">
+            <div class="bundle-name">duo · 2 flaschen</div>
+            <div class="bundle-meta">€22,45 / fl · 12 wochen</div>
+          </div>
+          <div class="bundle-prices">
+            <div class="price-now">€44,90</div>
+            <div class="save-badge">spare €29</div>
+          </div>
+        </div>
+      </div>
+      <div class="bundle">
+        <div class="bundle-flag gold">komplettes ritual</div>
+        <div class="bundle-row">
+          <div class="bundle-radio"></div>
+          <div class="bundle-content">
+            <div class="bundle-name">trio · 3 flaschen</div>
+            <div class="bundle-meta">€23,30 / fl</div>
+          </div>
+          <div class="bundle-prices">
+            <div class="price-now">€69,90</div>
+            <div class="save-badge">+ etui</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stock-bar" style="margin-bottom: 0;">
+      <div class="stock-icon">✓</div>
+      <div class="stock-text">
+        <strong>versand heute</strong>
+        <span>bestellung bis 14 uhr</span>
+      </div>
+    </div>
+
+    <button class="bottom-sheet-cta">in den warenkorb · €44,90</button>
+    <p style="text-align: center; font-size: 11px; color: var(--ink-3); margin-top: 12px;">
+      60 tage geld zurück · klarna · paypal · apple pay
+    </p>
+  </div>
+</div>
+
+<script>
+  // Bundle selection
+  document.querySelectorAll('.bundle').forEach(b => {
+    b.addEventListener('click', () => {
+      const parent = b.closest('.bundles');
+      parent.querySelectorAll('.bundle').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+    });
+  });
+
+  // Sub toggle
+  const subSwitch = document.getElementById('subSwitch');
+  if (subSwitch) subSwitch.addEventListener('click', () => subSwitch.classList.toggle('on'));
+
+  // Bottom sheet
+  const sheet = document.getElementById('sheet');
+  const overlay = document.getElementById('overlay');
+  const openBtn = document.getElementById('openSheet');
+  const closeBtn = document.getElementById('closeSheet');
+  function openSheet() { sheet.classList.add('show'); overlay.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function closeSheet() { sheet.classList.remove('show'); overlay.classList.remove('show'); document.body.style.overflow = ''; }
+  if (openBtn) openBtn.addEventListener('click', openSheet);
+  if (closeBtn) closeBtn.addEventListener('click', closeSheet);
+  if (overlay) overlay.addEventListener('click', closeSheet);
+
+  // Gallery dot indicator
+  const gallery = document.getElementById('gallery');
+  const dots = document.querySelectorAll('.gallery-dot');
+  if (gallery) {
+    gallery.addEventListener('scroll', () => {
+      const idx = Math.round(gallery.scrollLeft / gallery.clientWidth);
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    });
+  }
+
+  // Before/after slider
+  const slider = document.getElementById('baSlider');
+  if (slider) {
+    const after = slider.querySelector('.ba-after');
+    const divider = slider.querySelector('.ba-divider');
+    let dragging = false;
+    function updateSlider(x) {
+      const rect = slider.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+      after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      divider.style.left = `${pct}%`;
+    }
+    slider.addEventListener('mousedown', e => { dragging = true; updateSlider(e.clientX); });
+    document.addEventListener('mousemove', e => { if (dragging) updateSlider(e.clientX); });
+    document.addEventListener('mouseup', () => dragging = false);
+    slider.addEventListener('touchstart', e => { dragging = true; updateSlider(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('touchmove', e => { if (dragging) { e.preventDefault(); updateSlider(e.touches[0].clientX); } }, { passive: false });
+    document.addEventListener('touchend', () => dragging = false);
+  }
+</script>
+
+</body>
+</html>

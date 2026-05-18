@@ -1,0 +1,21 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-compliance-{{ section.id }}">
+  <section class="rs-compliance">
+    <p>{{ section.settings.text }}</p>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · compliance footer",
+  "tag": "section",
+  "class": "rescens-section-compliance",
+  "settings": [
+    { "type": "textarea", "id": "text", "label": "Compliance text", "default": "*anwenderstudie unter dermatologischer kontrolle, n=52, 8-wöchige anwendung, testinstitut 2025. subjektive bewertung. individuelle ergebnisse können variieren. kein erfolgsversprechen. eu kosmetikverordnung 1223/2009." }
+  ],
+  "presets": [
+    { "name": "rescens · compliance footer", "category": "rescens" }
+  ]
+}
+{% endschema %}

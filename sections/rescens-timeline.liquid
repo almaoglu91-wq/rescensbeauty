@@ -1,0 +1,61 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-timeline-{{ section.id }}">
+  <section class="rs-section rs-warm">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="rs-section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="rs-section-title">{{ section.settings.title }}</h2>
+    {%- if section.settings.lead != blank -%}
+      <p class="rs-section-lead">{{ section.settings.lead }}</p>
+    {%- endif -%}
+
+    <div class="rs-timeline">
+      {%- for b in section.blocks -%}
+        <div class="rs-timeline-step" {{ b.shopify_attributes }}>
+          <div class="rs-timeline-circle"{% if b.settings.image %} style="background-image: url('{{ b.settings.image | image_url: width: 200 }}');"{% endif %}></div>
+          <span class="rs-timeline-week">{{ b.settings.week }}</span>
+          <div class="rs-timeline-label">{{ b.settings.label }}</div>
+          <div class="rs-timeline-desc">{{ b.settings.desc }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · timeline",
+  "tag": "section",
+  "class": "rescens-section-timeline",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "deine routine" },
+    { "type": "richtext", "id": "title", "label": "Titel", "default": "<p>im <span class=\"rs-accent\">zeitverlauf.</span></p>" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "realistische erwartungen schützen vor frust." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Timeline-Schritt",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto (rund)" },
+        { "type": "text", "id": "week", "label": "Tag/Woche", "default": "woche 4" },
+        { "type": "text", "id": "label", "label": "Label", "default": "frühe pflege phase" },
+        { "type": "text", "id": "desc", "label": "Beschreibung", "default": "wimpern wirken weicher und geschmeidiger. reduzierte brüchigkeit." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · timeline",
+      "category": "rescens",
+      "blocks": [
+        { "type": "step", "settings": { "week": "woche 4", "label": "frühe pflege phase", "desc": "wimpern wirken weicher und geschmeidiger. reduzierte brüchigkeit." } },
+        { "type": "step", "settings": { "week": "woche 8", "label": "sichtbare länge", "desc": "mehrheit berichtet sichtbar längere und dichter wirkende wimpern." } },
+        { "type": "step", "settings": { "week": "woche 12", "label": "peak ergebnis", "desc": "volle wirkung der pflege routine. wimpernlinie wirkt definierter." } },
+        { "type": "step", "settings": { "week": "woche 16+", "label": "maintenance", "desc": "reduzierte anwendung. ergebnis stabil halten. routine als ritual." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
