@@ -1,15 +1,33 @@
 {%- render 'rescens-assets' -%}
 
+{%- liquid
+  assign s = section.settings
+-%}
+
 <div class="rescens-scope" id="rescens-faq-split-{{ section.id }}">
-  <section class="rs-section rs-no-pad rs-faqsplit">
-    <div class="rs-faqsplit-grid{% if section.settings.image_left %} rs-faqsplit-flip{% endif %}">
+  <section
+    class="rs-section rs-no-pad rs-faqsplit"
+    style="
+      --fs-section-bg:{{ s.section_bg }};
+      --fs-panel-bg:{{ s.panel_bg }};
+      --fs-title-color:{{ s.title_color }};
+      --fs-text-color:{{ s.text_color }};
+      --fs-divider:{{ s.divider_color }};
+      --fs-icon:{{ s.icon_color }};
+      --fs-radius:{{ s.corner_radius }}px;
+      --fs-gap:{{ s.column_gap }}px;
+      --fs-mt:{{ s.margin_top }}px;
+      --fs-mb:{{ s.margin_bottom }}px;
+      --fs-mx:{{ s.margin_horizontal }}px;
+    ">
+    <div class="rs-faqsplit-grid{% if s.image_left %} rs-faqsplit-flip{% endif %}">
       <div class="rs-faqsplit-panel">
         <div class="rs-faqsplit-head">
-          {%- if section.settings.title != blank -%}
-            <h2 class="rs-faqsplit-title">{{ section.settings.title }}</h2>
+          {%- if s.title != blank -%}
+            <h2 class="rs-faqsplit-title">{{ s.title }}</h2>
           {%- endif -%}
-          {%- if section.settings.subtitle != blank -%}
-            <p class="rs-faqsplit-sub">{{ section.settings.subtitle }}</p>
+          {%- if s.subtitle != blank -%}
+            <p class="rs-faqsplit-sub">{{ s.subtitle }}</p>
           {%- endif -%}
         </div>
 
@@ -27,14 +45,14 @@
       </div>
 
       <div class="rs-faqsplit-media">
-        {%- if section.settings.image -%}
+        {%- if s.image -%}
           <img
-            src="{{ section.settings.image | image_url: width: 1400 }}"
-            srcset="{{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+            src="{{ s.image | image_url: width: 1400 }}"
+            srcset="{{ s.image | image_url: width: 700 }} 700w, {{ s.image | image_url: width: 1400 }} 1400w"
             sizes="(min-width: 768px) 50vw, 100vw"
-            alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
+            alt="{{ s.image.alt | default: s.title | escape }}"
+            width="{{ s.image.width }}"
+            height="{{ s.image.height }}"
             loading="lazy">
         {%- else -%}
           <div class="rs-faqsplit-media-ph"></div>
@@ -54,8 +72,23 @@
     { "type": "text", "id": "title", "label": "Titel", "default": "FAQ" },
     { "type": "text", "id": "subtitle", "label": "Untertitel", "default": "Erfahre mehr über rescens." },
     { "type": "header", "content": "Bild" },
-    { "type": "image_picker", "id": "image", "label": "Bild (rechte Spalte)" },
-    { "type": "checkbox", "id": "image_left", "label": "Bild links anzeigen (Layout spiegeln)", "default": false }
+    { "type": "image_picker", "id": "image", "label": "Bild" },
+    { "type": "checkbox", "id": "image_left", "label": "Bild links anzeigen (Layout spiegeln)", "default": false },
+
+    { "type": "header", "content": "Abstände & Form" },
+    { "type": "range", "id": "margin_top", "label": "Abstand oben", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "margin_bottom", "label": "Abstand unten", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "margin_horizontal", "label": "Abstand links & rechts", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "column_gap", "label": "Lücke zwischen den Spalten", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "corner_radius", "label": "Eckenrundung", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 14 },
+
+    { "type": "header", "content": "Farben" },
+    { "type": "color", "id": "section_bg", "label": "Hintergrund Section", "default": "#FFFFFF" },
+    { "type": "color", "id": "panel_bg", "label": "Hintergrund FAQ-Panel", "default": "#EEEDE8" },
+    { "type": "color", "id": "title_color", "label": "Titel-Farbe", "default": "#55524D" },
+    { "type": "color", "id": "text_color", "label": "Text-Farbe (Fragen & Antworten)", "default": "#6E6A64" },
+    { "type": "color", "id": "divider_color", "label": "Trennlinien", "default": "#DEDBD4" },
+    { "type": "color", "id": "icon_color", "label": "Plus/Minus-Icon", "default": "#9C968D" }
   ],
   "blocks": [
     {
