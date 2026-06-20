@@ -1681,3 +1681,107 @@ body.rs-has-sticky-cta { padding-bottom: calc(76px + env(safe-area-inset-bottom,
   .rescens-scope .rs-gallery-slide { aspect-ratio: 4/5; }
   .rescens-scope .rs-brand-mark { font-size: 22vw; margin-bottom: -10vw; }
 }
+
+/* FAQ SPLIT (two column · image + accordion) */
+.rescens-scope .rs-faqsplit { background: var(--rs-bg); }
+.rescens-scope .rs-faqsplit-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.rescens-scope .rs-faqsplit-panel {
+  background: var(--rs-bg-soft);
+  padding: 48px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  order: 2;
+}
+.rescens-scope .rs-faqsplit-head { margin-bottom: 28px; }
+.rescens-scope .rs-faqsplit-title {
+  font-size: 34px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--rs-ink-2);
+  margin-bottom: 8px;
+}
+.rescens-scope .rs-faqsplit-sub {
+  font-size: 14px;
+  color: var(--rs-ink-2);
+  line-height: 1.5;
+}
+.rescens-scope .rs-faqsplit-item { border-top: 1px solid var(--rs-line); }
+.rescens-scope .rs-faqsplit-item:last-child { border-bottom: 1px solid var(--rs-line); }
+.rescens-scope .rs-faqsplit-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.rescens-scope .rs-faqsplit-item summary::-webkit-details-marker { display: none; }
+.rescens-scope .rs-faqsplit-q {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--rs-ink-2);
+}
+.rescens-scope .rs-faqsplit-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--rs-ink-3);
+}
+.rescens-scope .rs-faqsplit-icon::before,
+.rescens-scope .rs-faqsplit-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--rs-ink-2);
+}
+.rescens-scope .rs-faqsplit-icon::before { width: 9px; height: 1px; }
+.rescens-scope .rs-faqsplit-icon::after { width: 1px; height: 9px; transition: opacity 0.2s ease; }
+.rescens-scope .rs-faqsplit-item[open] .rs-faqsplit-icon::after { opacity: 0; }
+.rescens-scope .rs-faqsplit-answer {
+  padding: 2px 0 20px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--rs-ink-2);
+  max-width: 90%;
+}
+.rescens-scope .rs-faqsplit-answer p + p { margin-top: 10px; }
+.rescens-scope .rs-faqsplit-answer strong { color: var(--rs-ink); font-weight: 500; }
+.rescens-scope .rs-faqsplit-media {
+  order: 1;
+  position: relative;
+  min-height: 320px;
+  aspect-ratio: 4/5;
+  background: var(--rs-bg-soft);
+}
+.rescens-scope .rs-faqsplit-media img,
+.rescens-scope .rs-faqsplit-media-ph {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rescens-scope .rs-faqsplit-media-ph { background: #C9BCAA; }
+
+@media (min-width: 768px) {
+  .rescens-scope .rs-faqsplit-grid { grid-template-columns: 1fr 1fr; }
+  .rescens-scope .rs-faqsplit-panel { order: 1; padding: 72px 56px; }
+  .rescens-scope .rs-faqsplit-media { order: 2; aspect-ratio: auto; }
+  .rescens-scope .rs-faqsplit-flip .rs-faqsplit-panel { order: 2; }
+  .rescens-scope .rs-faqsplit-flip .rs-faqsplit-media { order: 1; }
+  .rescens-scope .rs-faqsplit-title { font-size: 44px; }
+}

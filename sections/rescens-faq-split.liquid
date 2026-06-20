@@ -1,0 +1,85 @@
+{%- render 'rescens-assets' -%}
+
+<div class="rescens-scope" id="rescens-faq-split-{{ section.id }}">
+  <section class="rs-section rs-no-pad rs-faqsplit">
+    <div class="rs-faqsplit-grid{% if section.settings.image_left %} rs-faqsplit-flip{% endif %}">
+      <div class="rs-faqsplit-panel">
+        <div class="rs-faqsplit-head">
+          {%- if section.settings.title != blank -%}
+            <h2 class="rs-faqsplit-title">{{ section.settings.title }}</h2>
+          {%- endif -%}
+          {%- if section.settings.subtitle != blank -%}
+            <p class="rs-faqsplit-sub">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="rs-faqsplit-list">
+          {%- for b in section.blocks -%}
+            <details class="rs-faqsplit-item"{% if b.settings.open_by_default %} open{% endif %} {{ b.shopify_attributes }}>
+              <summary>
+                <span class="rs-faqsplit-q">{{ b.settings.question }}</span>
+                <span class="rs-faqsplit-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="rs-faqsplit-answer">{{ b.settings.answer }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="rs-faqsplit-media">
+        {%- if section.settings.image -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1400 }}"
+            srcset="{{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+            sizes="(min-width: 768px) 50vw, 100vw"
+            alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy">
+        {%- else -%}
+          <div class="rs-faqsplit-media-ph"></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "rescens · faq split",
+  "tag": "section",
+  "class": "rescens-section-faq-split",
+  "settings": [
+    { "type": "header", "content": "Inhalt" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "FAQ" },
+    { "type": "text", "id": "subtitle", "label": "Untertitel", "default": "Erfahre mehr über rescens." },
+    { "type": "header", "content": "Bild" },
+    { "type": "image_picker", "id": "image", "label": "Bild (rechte Spalte)" },
+    { "type": "checkbox", "id": "image_left", "label": "Bild links anzeigen (Layout spiegeln)", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "FAQ Eintrag",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Frage", "default": "Wie wende ich das serum an" },
+        { "type": "richtext", "id": "answer", "label": "Antwort", "default": "<p>einmal täglich abends auf die gereinigte, trockene wimpernlinie auftragen.</p>" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Standardmäßig offen", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rescens · faq split",
+      "category": "rescens",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "wie passt rescens in meine tägliche routine", "answer": "<p>abends nach der reinigung als letzten pflegeschritt auf die obere wimpernlinie auftragen. wie ein eyeliner, nur pflegend.</p>" } },
+        { "type": "qa", "settings": { "question": "kann ich es mit anderen seren kombinieren", "answer": "<p>ja. trage rescens als letzten schritt auf und lass es kurz einziehen, bevor weitere produkte folgen.</p>" } },
+        { "type": "qa", "settings": { "question": "was ist der unterschied zu hormonellen seren", "answer": "<p>rescens wirkt über vier signalpeptide, die die wimpernlinie pflegen und stärken — <strong>ohne prostaglandin analoga</strong> und ohne hormone.</p>" } },
+        { "type": "qa", "settings": { "question": "ist es dermatologisch getestet", "answer": "<p>ja. dermatologisch getestet mit der bewertung dermatest „sehr gut\". verträglich auch bei sensiblen augen.</p>" } },
+        { "type": "qa", "settings": { "question": "ist es vegan und tierversuchsfrei", "answer": "<p>ja. rescens ist vegan formuliert und tierversuchsfrei.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
