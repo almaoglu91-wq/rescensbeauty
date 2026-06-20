@@ -27,6 +27,7 @@ sections/
   rescens-stack-offer.liquid    # „mehr als ein serum" Stack-Wert (dark bg)
   rescens-guarantee.liquid      # 60 Tage Garantie
   rescens-faq.liquid            # „in case you are wondering..." + FAQ-Akkordeon
+  rescens-faq-split.liquid      # 2-Spalten FAQ (Karten + Bild, animiertes Akkordeon)
   rescens-why.liquid            # „warum alle darüber reden" (peach bg)
   rescens-reviews.liquid        # Reviews mit Summary + Filter + Cards
   rescens-trust-badges.liquid   # 6er-Grid Trust-Badges (warm bg)
