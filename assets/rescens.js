@@ -130,6 +130,50 @@
     });
   }
 
+  // FAQ SPLIT — smooth open/close for native <details> (both directions)
+  function initFaqSplit(root) {
+    (root || document).querySelectorAll('.rs-faqsplit-item').forEach(function (item) {
+      once(item, 'faqsplit', function () {
+        var summary = item.querySelector('summary');
+        if (!summary) return;
+        summary.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (item.dataset.animating) return;
+          item.dataset.animating = '1';
+          var wrap = item.querySelector('.rs-faqsplit-answer-wrap');
+
+          function clear() { delete item.dataset.animating; }
+
+          if (item.open) {
+            // collapse: animate to 0fr, then drop the open attribute
+            if (wrap) {
+              wrap.style.gridTemplateRows = '1fr';
+              requestAnimationFrame(function () { wrap.style.gridTemplateRows = '0fr'; });
+              wrap.addEventListener('transitionend', function te() {
+                wrap.removeEventListener('transitionend', te);
+                item.open = false;
+                wrap.style.gridTemplateRows = '';
+                clear();
+              }, { once: true });
+            } else { item.open = false; clear(); }
+          } else {
+            // expand: open first, then animate 0fr -> 1fr
+            item.open = true;
+            if (wrap) {
+              wrap.style.gridTemplateRows = '0fr';
+              requestAnimationFrame(function () { wrap.style.gridTemplateRows = '1fr'; });
+              wrap.addEventListener('transitionend', function te() {
+                wrap.removeEventListener('transitionend', te);
+                wrap.style.gridTemplateRows = '';
+                clear();
+              }, { once: true });
+            } else { clear(); }
+          }
+        });
+      });
+    });
+  }
+
   function initAll(root) {
     initBundles(root);
     initSubSwitch(root);
@@ -137,6 +181,7 @@
     initGallery(root);
     initBaSlider(root);
     initFilters(root);
+    initFaqSplit(root);
   }
 
   if (document.readyState === 'loading') {

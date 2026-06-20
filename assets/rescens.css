@@ -1742,10 +1742,10 @@ body.rs-has-sticky-cta { padding-bottom: calc(76px + env(safe-area-inset-bottom,
 .rescens-scope .rs-faqsplit-icon {
   position: relative;
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  border: 1px solid var(--fs-icon, var(--rs-ink-3));
+  background: var(--fs-icon, var(--rs-ink-3));
 }
 .rescens-scope .rs-faqsplit-icon::before,
 .rescens-scope .rs-faqsplit-icon::after {
@@ -1754,19 +1754,30 @@ body.rs-has-sticky-cta { padding-bottom: calc(76px + env(safe-area-inset-bottom,
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--fs-icon, var(--rs-ink-2));
+  background: #fff;
+  border-radius: 1px;
 }
-.rescens-scope .rs-faqsplit-icon::before { width: 9px; height: 1px; }
-.rescens-scope .rs-faqsplit-icon::after { width: 1px; height: 9px; transition: opacity 0.2s ease; }
-.rescens-scope .rs-faqsplit-item[open] .rs-faqsplit-icon::after { opacity: 0; }
+.rescens-scope .rs-faqsplit-icon::before { width: 11px; height: 1.5px; }
+.rescens-scope .rs-faqsplit-icon::after { width: 1.5px; height: 11px; transition: opacity 0.25s ease, transform 0.25s ease; }
+.rescens-scope .rs-faqsplit-item[open] .rs-faqsplit-icon::after { opacity: 0; transform: translate(-50%, -50%) rotate(90deg); }
+/* Smooth expand/collapse (grid-rows trick; JS keeps both directions animated) */
+.rescens-scope .rs-faqsplit-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s ease;
+}
+.rescens-scope .rs-faqsplit-item[open] .rs-faqsplit-answer-wrap { grid-template-rows: 1fr; }
 .rescens-scope .rs-faqsplit-answer {
-  padding: 2px 0 20px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 2px 0 0;
   font-size: 13px;
   line-height: 1.65;
   text-transform: none;
   color: var(--fs-text-color, var(--rs-ink-2));
   max-width: 92%;
 }
+.rescens-scope .rs-faqsplit-item[open] .rs-faqsplit-answer { padding-bottom: 20px; }
 .rescens-scope .rs-faqsplit-answer p + p { margin-top: 10px; }
 .rescens-scope .rs-faqsplit-answer strong { font-weight: 600; }
 .rescens-scope .rs-faqsplit-media {
