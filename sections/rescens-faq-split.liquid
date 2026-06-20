@@ -18,7 +18,8 @@
       --fs-gap:{{ s.column_gap }}px;
       --fs-mt:{{ s.margin_top }}px;
       --fs-mb:{{ s.margin_bottom }}px;
-      --fs-mx:{{ s.margin_horizontal }}px;
+      --fs-ml:{{ s.margin_left }}px;
+      --fs-mr:{{ s.margin_right }}px;
     ">
     <div class="rs-faqsplit-grid{% if s.image_left %} rs-faqsplit-flip{% endif %}">
       <div class="rs-faqsplit-panel">
@@ -78,7 +79,8 @@
     { "type": "header", "content": "Abstände & Form" },
     { "type": "range", "id": "margin_top", "label": "Abstand oben", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
     { "type": "range", "id": "margin_bottom", "label": "Abstand unten", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
-    { "type": "range", "id": "margin_horizontal", "label": "Abstand links & rechts", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "margin_left", "label": "Abstand links", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "margin_right", "label": "Abstand rechts", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
     { "type": "range", "id": "column_gap", "label": "Lücke zwischen den Spalten", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 24 },
     { "type": "range", "id": "corner_radius", "label": "Eckenrundung", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 14 },
 

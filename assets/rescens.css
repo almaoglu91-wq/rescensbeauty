@@ -1687,7 +1687,7 @@ body.rs-has-sticky-cta { padding-bottom: calc(76px + env(safe-area-inset-bottom,
    with sensible fallbacks so the section also works without them. */
 .rescens-scope .rs-faqsplit {
   background: var(--fs-section-bg, var(--rs-bg));
-  padding: var(--fs-mt, 24px) var(--fs-mx, 24px) var(--fs-mb, 24px);
+  padding: var(--fs-mt, 24px) var(--fs-mr, 24px) var(--fs-mb, 24px) var(--fs-ml, 24px);
 }
 .rescens-scope .rs-faqsplit-grid {
   display: grid;
